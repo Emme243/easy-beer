@@ -3,7 +3,7 @@
     <h1 class="text-h2">Easy Beer 🍻</h1>
     <p class="mt-3">Encuentra la cerveza que más te guste 😋</p>
 
-    <BeerList class="my-10" />
+    <BeerList />
   </v-container>
 </template>
 

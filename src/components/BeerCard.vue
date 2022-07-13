@@ -13,7 +13,7 @@
       </v-app-bar>
     </v-img>
     <v-card-title class="text-left">
-      <h3 class="text-h5 text-truncate">{{ beer.name }}</h3>
+      <h3 class="text-h5 text-truncate">{{ beer.id }} - {{ beer.name }}</h3>
     </v-card-title>
     <v-card-subtitle class="text-left">
       <div class="d-flex align-baseline">
@@ -23,7 +23,7 @@
       <span class="font-weight-bold">con {{ beer.abv }}% de alcohol</span>
     </v-card-subtitle>
     <v-divider class="mx-4"></v-divider>
-    <v-card-text class="text--primary text-left truncate-3-lines pa-0 ma-4 pr-8">
+    <v-card-text class="text--primary text-left text-truncate-3-lines pa-0 ma-4 pr-8">
       {{ beer.description }}
     </v-card-text>
   </v-card>
@@ -42,7 +42,7 @@ export default {
 </script>
 
 <style scoped>
-.truncate-3-lines {
+.text-truncate-3-lines {
   width: 100%;
   display: -webkit-box;
   -webkit-line-clamp: 3;
