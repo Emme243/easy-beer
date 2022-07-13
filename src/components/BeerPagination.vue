@@ -25,7 +25,6 @@ export default {
       this.$router.push({
         query: { page: this.currentPage.toString() },
       });
-      this.$emit('get-beers', this.currentPage);
     },
   },
 };

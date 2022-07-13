@@ -1,16 +1,16 @@
 <template>
   <v-app>
     <v-main>
-      <BeerContainer />
+      <BeerLayout />
     </v-main>
   </v-app>
 </template>
 
 <script>
-import BeerContainer from '@/components/BeerContainer';
+import BeerLayout from '@/layouts/BeerLayout';
 
 export default {
   name: 'HomeView',
-  components: { BeerContainer },
+  components: { BeerLayout },
 };
 </script>

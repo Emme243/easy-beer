@@ -4,14 +4,16 @@
     <p class="mt-3">Encuentra la cerveza que más te guste 😋</p>
 
     <BeerList />
+    <BeerPagination />
   </v-container>
 </template>
 
 <script>
 import BeerList from '@/components/BeerList';
+import BeerPagination from '@/components/BeerPagination';
 
 export default {
-  name: 'BeerContainer',
-  components: { BeerList },
+  name: 'BeerLayout',
+  components: { BeerPagination, BeerList },
 };
 </script>

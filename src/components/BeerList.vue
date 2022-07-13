@@ -15,21 +15,17 @@
   <v-alert v-else-if="beers.length === 0" type="info">
     No hay cervezas que mostrar con el criterio solicitado, intenta reducir los filtros
   </v-alert>
-  <div v-else>
-    <div class="grid-list mb-3 mt-5">
-      <BeerCard v-for="beer in beers" :key="`${beer.id}-${beer.name}`" :beer="beer" />
-    </div>
-    <BeerPagination @get-beers="getBeers" />
+  <div v-else class="grid-list mb-3 mt-5">
+    <BeerCard v-for="beer in beers" :key="`${beer.id}-${beer.name}`" :beer="beer" />
   </div>
 </template>
 
 <script>
 import BeerCard from '@/components/BeerCard';
-import BeerPagination from '@/components/BeerPagination';
 
 export default {
   name: 'BeerList',
-  components: { BeerPagination, BeerCard },
+  components: { BeerCard },
   data() {
     return {
       hasError: false,
@@ -56,6 +52,11 @@ export default {
   mounted() {
     const currentPage = +this.$route.query.page || 1;
     this.getBeers(currentPage);
+  },
+  watch: {
+    '$route.query.page': function (newPage) {
+      this.getBeers(+newPage);
+    },
   },
 };
 </script>
