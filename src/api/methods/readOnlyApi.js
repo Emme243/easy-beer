@@ -8,14 +8,16 @@ export class ReadOnlyApiService extends BaseApiService {
   }
 
   getQueryParams(params) {
-    return Object.keys(params)
+    if (!params) return '';
+    const queryParams = Object.keys(params)
       .map(key => `${key}=${params[key]}`)
       .join('&');
+    return `?${queryParams}`;
   }
 
   async getAll(params = {}) {
     return await this.execute(async () => {
-      const response = await fetch(this.getUrl() + this.getQueryParams(params), {});
+      const response = await fetch(`${this.getUrl()}${this.getQueryParams(params)}`);
       return await response.json();
     });
   }

@@ -1,10 +1,12 @@
 <template>
-  <div v-if="isLoading">
-    <v-row v-for="i in 2" class="mb-6">
-      <v-col v-for="j in 4" :key="i * j">
-        <v-skeleton-loader :boilerplate="true" type="image, list-item-two-line, button" />
-      </v-col>
-    </v-row>
+  <div v-if="isLoading" class="grid-list">
+    <v-skeleton-loader
+      min-width="300"
+      v-for="i in 8"
+      :key="1"
+      :boilerplate="true"
+      type="image, list-item-two-line, button"
+    />
   </div>
   <v-alert v-else-if="hasError" type="error">
     Ha habido un error al traer las cervezas, por qué no te relajas, te tomas una y lo vuelves a
@@ -13,24 +15,29 @@
   <v-alert v-else-if="beers.length === 0" type="info">
     No hay cervezas que mostrar con el criterio solicitado, intenta reducir los filtros
   </v-alert>
-  <div v-else>
-    <p v-for="beer in beers">{{ beer.id }} {{ beer.name }}</p>
+  <div v-else class="grid-list">
+    <BeerCard v-for="beer in beers" :key="beer.id" :beer="beer" />
   </div>
 </template>
 
 <script>
+import BeerCard from '@/components/BeerCard';
+
 export default {
   name: 'BeerList',
+  components: { BeerCard },
   data() {
     return {
       hasError: false,
       isLoading: true,
       beers: [],
+      beersPerPage: 15,
+      currentPage: 1,
     };
   },
   mounted() {
     this.$api.beers
-      .getAll()
+      .getAll({ per_page: this.beersPerPage, page: this.currentPage })
       .then(beers => {
         this.beers = beers;
       })
@@ -44,4 +51,10 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.grid-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 30px;
+}
+</style>

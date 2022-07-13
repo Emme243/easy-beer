@@ -1,10 +1,9 @@
 <template>
   <v-container class="text-center mt-5 body-1">
     <h1 class="text-h2">Easy Beer 🍻</h1>
-    <p>Encuentra la bebida que más te guste.</p>
-    <v-icon>fa fa-user</v-icon>
+    <p class="mt-3">Encuentra la cerveza que más te guste 😋</p>
 
-    <BeerList />
+    <BeerList class="my-10" />
   </v-container>
 </template>
 
