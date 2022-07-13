@@ -17,41 +17,31 @@
   </v-alert>
   <div v-else>
     <div class="grid-list mb-3 mt-5">
-      <BeerCard v-for="beer in beers" :key="beer.id" :beer="beer" />
+      <BeerCard v-for="beer in beers" :key="`${beer.id}-${beer.name}`" :beer="beer" />
     </div>
-    <div class="py-3 beer__pagination">
-      <v-pagination
-        :length="totalOfPages"
-        v-model="currentPage"
-        light
-        prev-icon="fa fa-caret-left"
-        next-icon="fa fa-caret-right"
-        @input="getBeers"
-      />
-    </div>
+    <BeerPagination @get-beers="getBeers" />
   </div>
 </template>
 
 <script>
 import BeerCard from '@/components/BeerCard';
+import BeerPagination from '@/components/BeerPagination';
 
 export default {
   name: 'BeerList',
-  components: { BeerCard },
+  components: { BeerPagination, BeerCard },
   data() {
     return {
       hasError: false,
       isLoading: true,
       beers: [],
-      beersPerPage: 15,
-      currentPage: 1,
-      totalOfPages: 8,
     };
   },
   methods: {
-    getBeers() {
+    getBeers(currentPage) {
+      const beersPerPage = 15;
       this.$api.beers
-        .getAll({ per_page: this.beersPerPage, page: this.currentPage })
+        .getAll({ per_page: beersPerPage, page: currentPage })
         .then(beers => {
           this.beers = beers;
         })
@@ -62,25 +52,10 @@ export default {
           this.isLoading = false;
         });
     },
-    getCurrentPageFromUrl() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const page = urlParams.get('page');
-      if (page) this.currentPage = parseInt(page);
-    },
-    setCurrentPageToUrl() {
-      const urlParams = new URLSearchParams(window.location.search);
-      urlParams.set('page', this.currentPage);
-      window.history.pushState({}, '', `?${urlParams.toString()}`);
-    },
   },
   mounted() {
-    this.getCurrentPageFromUrl();
-    this.getBeers();
-  },
-  watch: {
-    currentPage() {
-      this.setCurrentPageToUrl();
-    },
+    const currentPage = +this.$route.query.page || 1;
+    this.getBeers(currentPage);
   },
 };
 </script>
@@ -90,17 +65,5 @@ export default {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 30px;
-}
-
-.beer__pagination {
-  position: sticky;
-  bottom: 0;
-  background-color: rgba(256, 256, 256, 0.9);
-
-  @supports (backdrop-filter: blur(10px)) {
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    background-color: rgba(256, 256, 256, 0.8);
-  }
 }
 </style>
