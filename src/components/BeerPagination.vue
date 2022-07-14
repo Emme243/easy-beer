@@ -1,5 +1,5 @@
 <template>
-  <div class="py-3 beer__pagination">
+  <div class="py-3 beerPagination">
     <v-pagination
       :length="totalOfPages"
       :value="currentPage"
@@ -44,7 +44,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.beer__pagination {
+.beerPagination {
   position: sticky;
   bottom: 0;
   background-color: rgba(256, 256, 256, 0.9);

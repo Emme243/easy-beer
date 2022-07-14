@@ -1,8 +1,8 @@
 <template>
   <div v-if="isLoading" class="grid-list">
     <v-skeleton-loader
-      min-width="300"
-      v-for="i in 8"
+      min-width="250"
+      v-for="i in 6"
       :key="i"
       :boilerplate="true"
       type="image, list-item-two-line, button"
@@ -73,7 +73,7 @@ export default {
 <style scoped lang="scss">
 .grid-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-gap: 30px;
 }
 </style>

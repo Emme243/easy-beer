@@ -1,10 +1,11 @@
 <template>
-  <div class="d-flex align-center">
-    <v-text-field :value="searchQuery" placeholder="Búsqueda" @input="handleSearchQueryChange" />
-    <button class="ml-5" @click="handleSearchQueryChange('')">
-      <v-icon>fa fa-times</v-icon>
-    </button>
-  </div>
+  <v-text-field
+    :value="searchQuery"
+    placeholder="Búsqueda"
+    @input="handleSearchQueryChange"
+    :append-icon="searchQuery ? 'fa fa-times' : 'fa-solid fa-magnifying-glass'"
+    @click:append="handleSearchQueryChange('')"
+  />
 </template>
 
 <script>
@@ -41,5 +42,3 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>
