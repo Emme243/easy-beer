@@ -1,7 +1,7 @@
 export const pageStore = {
   namespaced: true,
   state: () => ({
-    page: 1,
+    page: 0,
   }),
   getters: {
     page: state => state.page,

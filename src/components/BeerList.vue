@@ -40,7 +40,11 @@ export default {
       this.isLoading = true;
       this.hasError = false;
       this.$api.beers
-        .getAll({ per_page: beersPerPage, page: this.currentPage })
+        .getAll({
+          per_page: beersPerPage,
+          page: this.currentPage,
+          ...(this.searchQuery && { beer_name: this.searchQuery }),
+        })
         .then(beers => {
           this.beers = beers || [];
         })
@@ -53,10 +57,13 @@ export default {
     },
   },
   computed: {
-    ...mapGetters({ currentPage: 'page/page' }),
+    ...mapGetters({ currentPage: 'page/page', searchQuery: 'search/search' }),
   },
   watch: {
     currentPage() {
+      this.fetchBeers();
+    },
+    searchQuery() {
       this.fetchBeers();
     },
   },

@@ -6,7 +6,7 @@
       light
       prev-icon="fa fa-caret-left"
       next-icon="fa fa-caret-right"
-      @input="setPageToStoreAndUrl"
+      @input="setCurrentPageInStore"
     />
   </div>
 </template>
@@ -23,13 +23,18 @@ export default {
   },
   methods: {
     ...mapActions({ setCurrentPageInStore: 'page/setPage' }),
-    setPageToStoreAndUrl(page) {
-      this.$router.push({ query: { page } });
-      this.setCurrentPageInStore(page);
+    setCurrentPageInUrl(page) {
+      const urlQuery = { ...this.$route.query, page };
+      this.$router.push({ query: urlQuery });
     },
   },
   computed: {
     ...mapGetters({ currentPage: 'page/page' }),
+  },
+  watch: {
+    currentPage(newPage, oldPage) {
+      if (oldPage !== 0) this.setCurrentPageInUrl(newPage);
+    },
   },
   mounted() {
     const currentPage = +this.$route.query.page || 1;

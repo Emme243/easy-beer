@@ -3,6 +3,7 @@
     <h1 class="text-h2">Easy Beer 🍻</h1>
     <p class="mt-3">Encuentra la cerveza que más te guste 😋</p>
 
+    <BeerSearch />
     <BeerList />
     <BeerPagination />
   </v-container>
@@ -11,9 +12,10 @@
 <script>
 import BeerList from '@/components/BeerList';
 import BeerPagination from '@/components/BeerPagination';
+import BeerSearch from '@/components/BeerSearch';
 
 export default {
   name: 'BeerLayout',
-  components: { BeerPagination, BeerList },
+  components: { BeerSearch, BeerPagination, BeerList },
 };
 </script>
