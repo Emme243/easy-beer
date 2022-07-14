@@ -43,6 +43,8 @@ export default {
         .getAll({
           per_page: beersPerPage,
           page: this.currentPage,
+          ...(this.abvRange.min !== 0 &&
+            this.abvRange.max !== 0 && { abv_gt: this.abvRange.min, abv_lt: this.abvRange.max }),
           ...(this.searchQuery && { beer_name: this.searchQuery }),
         })
         .then(beers => {
@@ -57,13 +59,20 @@ export default {
     },
   },
   computed: {
-    ...mapGetters({ currentPage: 'page/page', searchQuery: 'search/search' }),
+    ...mapGetters({
+      currentPage: 'page/page',
+      searchQuery: 'search/search',
+      abvRange: 'abvRange/abvRange',
+    }),
   },
   watch: {
     currentPage() {
       this.fetchBeers();
     },
     searchQuery() {
+      this.fetchBeers();
+    },
+    abvRange() {
       this.fetchBeers();
     },
   },

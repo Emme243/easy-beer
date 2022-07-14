@@ -3,7 +3,8 @@
     :value="searchQuery"
     placeholder="Búsqueda"
     @input="handleSearchQueryChange"
-    :append-icon="searchQuery ? 'fa fa-times' : 'fa-solid fa-magnifying-glass'"
+    prepend-icon="fa-solid fa-magnifying-glass"
+    :append-icon="searchQuery && 'fa fa-times'"
     @click:append="handleSearchQueryChange('')"
   />
 </template>
@@ -35,10 +36,6 @@ export default {
     searchQuery(newSearchQuery, oldSearchQuery) {
       if (oldSearchQuery) this.setSearchQueryInUrl(newSearchQuery);
     },
-  },
-  mounted() {
-    const searchQuery = this.$route.query.search || '';
-    this.setSearchQueryInStore(searchQuery);
   },
 };
 </script>

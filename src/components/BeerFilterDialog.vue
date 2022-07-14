@@ -1,11 +1,5 @@
 <template>
-  <v-dialog
-    v-model="isDialogOpen"
-    transition="dialog-bottom-transition"
-    :overlay-opacity="0.2"
-    max-width="500"
-    scrollable
-  >
+  <v-dialog transition="dialog-bottom-transition" :overlay-opacity="0.2" max-width="500" scrollable>
     <template #activator="{ on, attrs }">
       <div v-bind="attrs" v-on="on">
         <v-tooltip bottom color="primary">
@@ -36,11 +30,8 @@
         <v-spacer></v-spacer>
       </v-toolbar>
 
-      <v-card-text class="mt-5 filterContent">
-        <p v-for="i in 20">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aperiam culpa, harum
-          hic illum nam nisi non placeat sequi sit.
-        </p>
+      <v-card-text class="pt-5 filterContent">
+        <slot></slot>
       </v-card-text>
 
       <v-divider />
@@ -50,10 +41,6 @@
         <v-btn color="blue lighten-5" light depressed @click="isDialogOpen = false">
           <span>Limpiar</span>
           <v-icon right>fa fa-eraser</v-icon>
-        </v-btn>
-        <v-btn depressed color="primary" dark @click="isDialogOpen = false">
-          <span>Guardar</span>
-          <v-icon right>fa fa-save</v-icon>
         </v-btn>
       </v-card-actions>
     </v-card>

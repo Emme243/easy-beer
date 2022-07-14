@@ -36,10 +36,6 @@ export default {
       if (oldPage !== 0) this.setCurrentPageInUrl(newPage);
     },
   },
-  mounted() {
-    const currentPage = +this.$route.query.page || 1;
-    this.setCurrentPageInStore(currentPage);
-  },
 };
 </script>
 

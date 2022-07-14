@@ -1,3 +1,4 @@
+import { abvRangeStore } from '@/store/filtering/abvRange';
 import { pageStore } from '@/store/filtering/page';
 import { searchStore } from '@/store/filtering/search';
 import Vue from 'vue';
@@ -9,5 +10,6 @@ export default new Vuex.Store({
   modules: {
     page: pageStore,
     search: searchStore,
+    abvRange: abvRangeStore,
   },
 });
