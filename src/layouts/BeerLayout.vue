@@ -4,11 +4,11 @@
     <p class="mt-3">Encuentra la cerveza que más te guste 😋</p>
 
     <div class="beerLayout__search align-center px-6 d-flex">
-      <BeerSearch />
+      <BeerSearch class="mr-6" />
       <BeerFilterDialog>
         <BeerABVRange />
       </BeerFilterDialog>
-      <BeerClearFilterButton />
+      <BeerClearFilterButton class="ml-6" />
     </div>
     <BeerList />
     <BeerPagination />

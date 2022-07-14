@@ -5,7 +5,7 @@
       <!--ABV Beer Range Reset Button-->
       <button
         @click="handleAbvRangeChange([minAbvValue, maxAbvValue])"
-        v-show="isAbvRangeDefaultValue"
+        v-show="!isAbvRangeDefaultValue"
       >
         <v-icon small>fa fa-arrow-rotate-left</v-icon>
       </button>
