@@ -22,7 +22,9 @@
 
 <script>
 import BeerCard from '@/components/BeerCard';
+import { mapGetters } from 'vuex';
 
+const beersPerPage = 15;
 export default {
   name: 'BeerList',
   components: { BeerCard },
@@ -34,12 +36,13 @@ export default {
     };
   },
   methods: {
-    getBeers(currentPage) {
-      const beersPerPage = 15;
+    fetchBeers() {
+      this.isLoading = true;
+      this.hasError = false;
       this.$api.beers
-        .getAll({ per_page: beersPerPage, page: currentPage })
+        .getAll({ per_page: beersPerPage, page: this.currentPage })
         .then(beers => {
-          this.beers = beers;
+          this.beers = beers || [];
         })
         .catch(() => {
           this.hasError = true;
@@ -49,13 +52,12 @@ export default {
         });
     },
   },
-  mounted() {
-    const currentPage = +this.$route.query.page || 1;
-    this.getBeers(currentPage);
+  computed: {
+    ...mapGetters({ currentPage: 'page/page' }),
   },
   watch: {
-    '$route.query.page': function (newPage) {
-      this.getBeers(+newPage);
+    currentPage() {
+      this.fetchBeers();
     },
   },
 };

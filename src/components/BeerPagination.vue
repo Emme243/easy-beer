@@ -2,30 +2,38 @@
   <div class="py-3 beer__pagination">
     <v-pagination
       :length="totalOfPages"
-      v-model="currentPage"
+      :value="currentPage"
       light
       prev-icon="fa fa-caret-left"
       next-icon="fa fa-caret-right"
-      @input="setCurrentPageToUrl"
+      @input="setPageToStoreAndUrl"
     />
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
+
 export default {
   name: 'BeerPagination',
   data() {
     return {
-      currentPage: +this.$route.query.page || 1,
       totalOfPages: 8,
     };
   },
   methods: {
-    setCurrentPageToUrl() {
-      this.$router.push({
-        query: { page: this.currentPage.toString() },
-      });
+    ...mapActions({ setCurrentPageInStore: 'page/setPage' }),
+    setPageToStoreAndUrl(page) {
+      this.$router.push({ query: { page } });
+      this.setCurrentPageInStore(page);
     },
+  },
+  computed: {
+    ...mapGetters({ currentPage: 'page/page' }),
+  },
+  mounted() {
+    const currentPage = +this.$route.query.page || 1;
+    this.setCurrentPageInStore(currentPage);
   },
 };
 </script>
