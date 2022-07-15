@@ -44,17 +44,10 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn
+        <ResetModalFiltersButton
           :disabled="numberOfFiltersApplied === 0"
-          @click="resetFiltersInDialog"
-          class="mr-3"
-          color="blue"
-          depressed
-          outlined
-        >
-          <span>Limpiar filtros</span>
-          <v-icon right>fa fa-eraser</v-icon>
-        </v-btn>
+          @resetFiltersInModal="resetFiltersInDialog"
+        />
         <v-btn color="blue" dark depressed @click="isDialogOpen = false">
           <span>OK</span>
           <v-icon right>fa fa-check</v-icon>
@@ -65,10 +58,12 @@
 </template>
 
 <script>
+import ResetModalFiltersButton from '@/components/FilterModal/ResetButtons/ResetModalFiltersButton';
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
-  name: 'BeerFilterDialog',
+  name: 'FilterModal',
+  components: { ResetModalFiltersButton },
   data() {
     return {
       isDialogOpen: false,

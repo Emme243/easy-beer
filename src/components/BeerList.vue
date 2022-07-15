@@ -13,7 +13,9 @@
     intentar más tarde 😉
   </v-alert>
   <v-alert v-else-if="beers.length === 0" type="info">
-    No hay cervezas que mostrar con el criterio solicitado, intenta reducir los filtros
+    <h3 class="text-h5">No hay cervezas que mostrar con el criterio solicitado.</h3>
+    <span>Intenta reducir los criterios de búsqueda (barra de búsqueda y filtros)</span>
+    <ResetAllFiltersButton color="blue darken-4" />
   </v-alert>
   <div v-else class="grid-list mb-3 mt-5">
     <BeerCard v-for="beer in beers" :key="`${beer.id}-${beer.name}`" :beer="beer" />
@@ -22,12 +24,13 @@
 
 <script>
 import BeerCard from '@/components/Card/BeerCard';
+import ResetAllFiltersButton from '@/components/FilterModal/ResetButtons/ResetAllFiltersButton';
 import { mapGetters } from 'vuex';
 
 const beersPerPage = 15;
 export default {
   name: 'BeerList',
-  components: { BeerCard },
+  components: { ResetAllFiltersButton, BeerCard },
   data() {
     return {
       hasError: false,

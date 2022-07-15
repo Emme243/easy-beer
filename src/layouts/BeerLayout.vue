@@ -4,14 +4,14 @@
     <p class="mt-3">Encuentra la cerveza que más te guste 😋</p>
 
     <div class="beerLayout__search align-center px-6 d-flex">
-      <BeerSearch class="mr-6" />
-      <BeerFilterDialog>
+      <BeerSearch class="mr-3" />
+      <FilterModal>
         <BeerABVRange />
         <v-divider class="my-5" />
         <BeerBrewedDateContainer />
         <v-divider class="my-5" />
-      </BeerFilterDialog>
-      <BeerClearFilterButton class="ml-6" />
+      </FilterModal>
+      <ResetAllFiltersButton class="ml-3" />
     </div>
     <BeerList />
     <BeerPagination />
@@ -22,8 +22,8 @@
 import BeerBrewedDateContainer from '@/components/Filters/BrewedDate/BeerBrewedDateContainer';
 import { mapActions, mapGetters } from 'vuex';
 import BeerABVRange from '@/components/Filters/BeerABVRange';
-import BeerClearFilterButton from '@/components/Filters/BeerClearFilterButton';
-import BeerFilterDialog from '@/components/Filters/BeerFilterDialog';
+import ResetAllFiltersButton from '@/components/FilterModal/ResetButtons/ResetAllFiltersButton';
+import FilterModal from '@/components/FilterModal';
 import BeerList from '@/components/BeerList';
 import BeerPagination from '@/components/Filters/BeerPagination';
 import BeerSearch from '@/components/Filters/BeerSearch';
@@ -33,8 +33,8 @@ export default {
   components: {
     BeerBrewedDateContainer,
     BeerABVRange,
-    BeerClearFilterButton,
-    BeerFilterDialog,
+    ResetAllFiltersButton,
+    FilterModal,
     BeerList,
     BeerPagination,
     BeerSearch,
