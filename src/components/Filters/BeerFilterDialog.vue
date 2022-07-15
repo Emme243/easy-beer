@@ -44,7 +44,14 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="blue" outlined depressed @click="isDialogOpen = false" class="mr-3">
+        <v-btn
+          :disabled="numberOfFiltersApplied === 0"
+          @click="resetFiltersInDialog"
+          class="mr-3"
+          color="blue"
+          depressed
+          outlined
+        >
           <span>Limpiar filtros</span>
           <v-icon right>fa fa-eraser</v-icon>
         </v-btn>
@@ -58,7 +65,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'BeerFilterDialog',
@@ -66,6 +73,18 @@ export default {
     return {
       isDialogOpen: false,
     };
+  },
+  methods: {
+    ...mapActions({
+      resetAbvRangeInStore: 'abvRange/resetAbvRange',
+      resetBrewedDateInStore: 'brewedDate/resetBrewedDate',
+      setCurrentPageInStore: 'page/setPage',
+    }),
+    resetFiltersInDialog() {
+      this.resetAbvRangeInStore();
+      this.resetBrewedDateInStore();
+      this.setCurrentPageInStore(1);
+    },
   },
   computed: {
     ...mapGetters({

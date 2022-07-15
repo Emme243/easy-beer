@@ -30,11 +30,11 @@ export default {
   components: { BeerBrewedFinalMonth, BeerBrewedInitialMonth },
   methods: {
     ...mapActions({
-      resetBrewedDate: 'brewedDate/resetBrewedDate',
+      resetBrewedDateInStore: 'brewedDate/resetBrewedDate',
       setCurrentPageInStore: 'page/setPage',
     }),
     handleResetBrewedDate() {
-      this.resetBrewedDate();
+      this.resetBrewedDateInStore();
       this.setCurrentPageInStore(1);
     },
   },

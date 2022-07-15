@@ -14,10 +14,16 @@ export const abvRangeStore = {
     setAbvRange(state, abvRange) {
       state.abvRange = abvRange;
     },
+    resetAbvRange(state) {
+      state.abvRange = { min: state.minAbvValue, max: state.maxAbvValue };
+    },
   },
   actions: {
     setAbvRange({ commit }, abvRange) {
       commit('setAbvRange', abvRange);
+    },
+    resetAbvRange({ commit }) {
+      commit('resetAbvRange');
     },
   },
 };

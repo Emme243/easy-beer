@@ -3,10 +3,7 @@
     <div class="d-flex align-center">
       <h3 class="text-h6 mr-4">Volumen de alcohol</h3>
       <!--Beer ABV Range Reset Button-->
-      <button
-        @click="handleAbvRangeChange([minAbvValue, maxAbvValue])"
-        v-show="!isAbvRangeDefaultValue"
-      >
+      <button @click="resetAbvRangeInStore" v-show="!isAbvRangeDefaultValue">
         <v-icon small>fa fa-arrow-rotate-left</v-icon>
       </button>
     </div>
@@ -35,6 +32,7 @@ export default {
   name: 'BeerABVRange',
   methods: {
     ...mapActions({
+      resetAbvRangeInStore: 'abvRange/resetAbvRange',
       setAbvRangeInStore: 'abvRange/setAbvRange',
       setCurrentPageInStore: 'page/setPage',
     }),
