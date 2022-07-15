@@ -2,7 +2,7 @@
   <div>
     <div class="d-flex align-center">
       <h3 class="text-h6 mr-4">Volumen de alcohol</h3>
-      <!--ABV Beer Range Reset Button-->
+      <!--Beer ABV Range Reset Button-->
       <button
         @click="handleAbvRangeChange([minAbvValue, maxAbvValue])"
         v-show="!isAbvRangeDefaultValue"
@@ -10,8 +10,8 @@
         <v-icon small>fa fa-arrow-rotate-left</v-icon>
       </button>
     </div>
+    <span>Cantidad de alcohol en porcentaje (%) que una cerveza tiene.</span>
     <v-range-slider
-      :hint="`Cantidad de alcohol que tiene una cerveza [${abvRange.min} - ${abvRange.max}]%`"
       :max="maxAbvValue"
       :min="minAbvValue"
       :value="Object.values(abvRange)"
@@ -20,7 +20,11 @@
       persistent-hint
       step="1"
       thumb-label
+      hide-details
     />
+    <span class="font-weight-bold">
+      Se mostrarán cervezas con % de alcohol entre el ${{ abvRange.min }}% y el ${{ abvRange.max }}%
+    </span>
   </div>
 </template>
 

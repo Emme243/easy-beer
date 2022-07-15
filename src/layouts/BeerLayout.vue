@@ -7,6 +7,9 @@
       <BeerSearch class="mr-6" />
       <BeerFilterDialog>
         <BeerABVRange />
+        <v-divider class="my-5" />
+        <BeerBrewedDateContainer />
+        <v-divider class="my-5" />
       </BeerFilterDialog>
       <BeerClearFilterButton class="ml-6" />
     </div>
@@ -16,28 +19,32 @@
 </template>
 
 <script>
-import BeerABVRange from '@/components/BeerABVRange';
-import BeerClearFilterButton from '@/components/BeerClearFilterButton';
-import BeerFilterDialog from '@/components/BeerFilterDialog';
-import BeerList from '@/components/BeerList';
-import BeerPagination from '@/components/BeerPagination';
-import BeerSearch from '@/components/BeerSearch';
+import BeerBrewedDateContainer from '@/components/Filters/BrewedDate/BeerBrewedDateContainer';
 import { mapActions, mapGetters } from 'vuex';
+import BeerABVRange from '@/components/Filters/BeerABVRange';
+import BeerClearFilterButton from '@/components/Filters/BeerClearFilterButton';
+import BeerFilterDialog from '@/components/Filters/BeerFilterDialog';
+import BeerList from '@/components/BeerList';
+import BeerPagination from '@/components/Filters/BeerPagination';
+import BeerSearch from '@/components/Filters/BeerSearch';
 
 export default {
   name: 'BeerLayout',
   components: {
-    BeerClearFilterButton,
+    BeerBrewedDateContainer,
     BeerABVRange,
+    BeerClearFilterButton,
     BeerFilterDialog,
-    BeerSearch,
-    BeerPagination,
     BeerList,
+    BeerPagination,
+    BeerSearch,
   },
   methods: mapActions({
     setAbvRangeInStore: 'abvRange/setAbvRange',
     setCurrentPageInStore: 'page/setPage',
     setSearchQueryInStore: 'search/setSearch',
+    setBrewedFinalMonthInStore: 'brewedDate/setFinalMonth',
+    setBrewedInitialMonthInStore: 'brewedDate/setInitialMonth',
   }),
   computed: mapGetters({
     minAbvValue: 'abvRange/minAbvValue',
@@ -46,7 +53,7 @@ export default {
   mounted() {
     // NOTE: En este punto ya se ha cargado el componente BeerLayout.vue
     //       y se puede acceder a los datos de la query en la url,
-    //       entonces se pueden setear los valores de búsqueda en el store.
+    //       entonces se pueden setear los valores de búsqueda en el store de la app.
 
     const { abvMin, abvMax } = this.$route.query;
     this.setAbvRangeInStore({
@@ -59,6 +66,12 @@ export default {
 
     const searchQuery = this.$route.query.search || '';
     this.setSearchQueryInStore(searchQuery);
+
+    const brewedFinalMonth = this.$route.query.brewedFinalMonth || '';
+    this.setBrewedFinalMonthInStore(brewedFinalMonth);
+
+    const brewedInitialMonth = this.$route.query.brewedInitialMonth || '';
+    this.setBrewedInitialMonthInStore(brewedInitialMonth);
   },
 };
 </script>

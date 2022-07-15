@@ -1,5 +1,11 @@
 <template>
-  <v-dialog transition="dialog-bottom-transition" :overlay-opacity="0.2" max-width="500" scrollable>
+  <v-dialog
+    v-model="isDialogOpen"
+    transition="dialog-bottom-transition"
+    :overlay-opacity="0.2"
+    max-width="500"
+    scrollable
+  >
     <template #activator="{ on, attrs }">
       <div v-bind="attrs" v-on="on">
         <v-tooltip bottom color="primary">
@@ -38,9 +44,13 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="blue lighten-5" light depressed @click="isDialogOpen = false">
-          <span>Limpiar</span>
+        <v-btn color="blue" outlined depressed @click="isDialogOpen = false" class="mr-3">
+          <span>Limpiar filtros</span>
           <v-icon right>fa fa-eraser</v-icon>
+        </v-btn>
+        <v-btn color="blue" dark depressed @click="isDialogOpen = false">
+          <span>OK</span>
+          <v-icon right>fa fa-check</v-icon>
         </v-btn>
       </v-card-actions>
     </v-card>

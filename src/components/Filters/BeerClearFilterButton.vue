@@ -6,7 +6,7 @@
           <v-icon small>fa-solid fa-filter-circle-xmark</v-icon>
         </v-btn>
       </template>
-      <span>Limpiar todos los filtros</span>
+      <span>Limpiar TODOS los filtros</span>
     </v-tooltip>
   </div>
 </template>

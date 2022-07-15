@@ -1,4 +1,5 @@
 import { abvRangeStore } from '@/store/filtering/abvRange';
+import { brewedDateStore } from '@/store/filtering/brewedDate';
 import { pageStore } from '@/store/filtering/page';
 import { searchStore } from '@/store/filtering/search';
 import Vue from 'vue';
@@ -8,8 +9,9 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
+    abvRange: abvRangeStore,
+    brewedDate: brewedDateStore,
     page: pageStore,
     search: searchStore,
-    abvRange: abvRangeStore,
   },
 });

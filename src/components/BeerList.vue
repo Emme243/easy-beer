@@ -46,6 +46,12 @@ export default {
           ...(this.abvRange.min !== 0 &&
             this.abvRange.max !== 0 && { abv_gt: this.abvRange.min, abv_lt: this.abvRange.max }),
           ...(this.searchQuery && { beer_name: this.searchQuery }),
+          ...(this.brewedAfter && {
+            brewed_after: this.brewedAfter.split('-').reverse().join('-'),
+          }),
+          ...(this.brewedBefore && {
+            brewed_before: this.brewedBefore.split('-').reverse().join('-'),
+          }),
         })
         .then(beers => {
           this.beers = beers || [];
@@ -63,6 +69,8 @@ export default {
       currentPage: 'page/page',
       searchQuery: 'search/search',
       abvRange: 'abvRange/abvRange',
+      brewedAfter: 'brewedDate/getInitialMonth',
+      brewedBefore: 'brewedDate/getFinalMonth',
     }),
   },
   watch: {
@@ -73,6 +81,12 @@ export default {
       this.fetchBeers();
     },
     abvRange() {
+      this.fetchBeers();
+    },
+    brewedAfter() {
+      this.fetchBeers();
+    },
+    brewedBefore() {
       this.fetchBeers();
     },
   },
