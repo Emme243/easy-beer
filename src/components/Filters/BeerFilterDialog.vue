@@ -58,13 +58,30 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'BeerFilterDialog',
   data() {
     return {
       isDialogOpen: false,
-      numberOfFiltersApplied: 3,
     };
+  },
+  computed: {
+    ...mapGetters({
+      abvRange: 'abvRange/abvRange',
+      minAbvValue: 'abvRange/minAbvValue',
+      maxAbvValue: 'abvRange/maxAbvValue',
+      brewedInitialMonth: 'brewedDate/getInitialMonth',
+      brewedFinalMonth: 'brewedDate/getFinalMonth',
+    }),
+    numberOfFiltersApplied() {
+      let numberOfFiltersApplied = 0;
+      if (this.abvRange.min !== this.minAbvValue || this.abvRange.max !== this.maxAbvValue)
+        numberOfFiltersApplied++;
+      if (this.brewedInitialMonth || this.brewedFinalMonth) numberOfFiltersApplied++;
+      return numberOfFiltersApplied;
+    },
   },
 };
 </script>

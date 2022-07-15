@@ -31,11 +31,11 @@ export default {
   methods: {
     ...mapActions({
       resetBrewedDate: 'brewedDate/resetBrewedDate',
-      setPageInStore: 'page/setPage',
+      setCurrentPageInStore: 'page/setPage',
     }),
     handleResetBrewedDate() {
       this.resetBrewedDate();
-      this.setPageInStore(1);
+      this.setCurrentPageInStore(1);
     },
   },
   computed: {
