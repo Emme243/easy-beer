@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import BeerCard from '@/components/BeerCard';
+import BeerCard from '@/components/Card/BeerCard';
 import { mapGetters } from 'vuex';
 
 const beersPerPage = 15;
