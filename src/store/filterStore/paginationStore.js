@@ -1,7 +1,6 @@
-export const pageStore = {
-  namespaced: true,
+export const paginationStore = {
   state: () => ({
-    page: 0,
+    page: 1,
   }),
   getters: {
     page: state => state.page,
@@ -13,7 +12,10 @@ export const pageStore = {
   },
   actions: {
     setPage({ commit }, page) {
-      commit('setPage', page);
+      commit('setPage', +page || 1);
+    },
+    resetPage({ commit }) {
+      commit('setPage', 1);
     },
   },
 };

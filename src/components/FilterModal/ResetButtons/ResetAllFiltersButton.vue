@@ -42,43 +42,18 @@ export default {
     };
   },
   methods: {
-    ...mapActions({
-      setSearchQueryInStore: 'search/setSearch',
-      setCurrentPageInStore: 'page/setPage',
-      resetAbvRangeInStore: 'abvRange/resetAbvRange',
-      resetBrewedDateInStore: 'brewedDate/resetBrewedDate',
-    }),
+    ...mapActions({ resetAllFilters: 'filter/resetAllFilters' }),
     resetAllFiltersAndSearchBar() {
-      this.setSearchQueryInStore('');
-      this.setCurrentPageInStore(1);
-      this.resetAbvRangeInStore();
-      this.resetBrewedDateInStore();
+      this.resetAllFilters();
       this.isAlertShown = true;
       setTimeout(() => {
         this.isAlertShown = false;
       }, 3000);
     },
   },
-  computed: {
-    ...mapGetters({
-      abvRange: 'abvRange/abvRange',
-      minAbvValue: 'abvRange/minAbvValue',
-      maxAbvValue: 'abvRange/maxAbvValue',
-      currentPage: 'page/page',
-      brewedInitialMonth: 'brewedDate/getInitialMonth',
-      brewedFinalMonth: 'brewedDate/getFinalMonth',
-      searchQuery: 'search/search',
-    }),
-    areFiltersWithDefaultValue() {
-      return (
-        this.abvRange.min === this.minAbvValue &&
-        this.abvRange.max === this.maxAbvValue &&
-        !this.brewedInitialMonth &&
-        !this.brewedFinalMonth &&
-        !this.searchQuery
-      );
-    },
-  },
+  computed: mapGetters({
+    areFiltersWithDefaultValue: 'filter/areFiltersWithDefaultValue',
+  }),
 };
 </script>
 

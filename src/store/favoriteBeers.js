@@ -37,7 +37,7 @@ export const favoriteBeersStore = {
     },
     isBeerInFavorites(state) {
       return id => {
-        return Boolean(state.favoriteBeers.find(beer => beer.id === id));
+        return state.favoriteBeers.some(beer => beer.id === id);
       };
     },
   },

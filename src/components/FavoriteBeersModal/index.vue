@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-dialog
-      v-model="isDialogOpen"
+      v-model="isModalOpen"
       transition="dialog-bottom-transition"
       :overlay-opacity="0.2"
       max-width="400"
@@ -35,7 +35,7 @@
 
       <v-card>
         <v-toolbar dark color="deep-purple">
-          <v-btn icon dark @click="isDialogOpen = false">
+          <v-btn icon dark @click="isModalOpen = false">
             <v-icon small>fa fa-times</v-icon>
           </v-btn>
           <v-toolbar-title>
@@ -67,7 +67,7 @@
             <span :class="{ 'white--text': !isFavoriteBeersEmpty }">Vacíar</span>
             <v-icon right color="white">fa fa-eraser</v-icon>
           </v-btn>
-          <v-btn color="deep-purple" outlined dark depressed @click="isDialogOpen = false">
+          <v-btn color="deep-purple" outlined dark depressed @click="isModalOpen = false">
             <span>Cerrar</span>
             <v-icon right>fa fa-times</v-icon>
           </v-btn>
@@ -82,16 +82,15 @@ import BeerCard from '@/components/Card/BeerCard';
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
-  name: 'FavsModal',
+  name: 'FavoriteBeersModal',
   components: { BeerCard },
 
   data() {
     return {
-      isDialogOpen: false,
+      isModalOpen: false,
     };
   },
   methods: mapActions({
-    setFavoriteBeersInStore: 'favoriteBeers/setFavoriteBeers',
     resetFavoriteBeersInStore: 'favoriteBeers/resetFavoriteBeers',
   }),
   computed: {
@@ -109,10 +108,6 @@ export default {
     favoriteBeersInStore() {
       localStorage.setItem('favoriteBeers', JSON.stringify(this.favoriteBeersInStore));
     },
-  },
-  mounted() {
-    const favoriteBeers = localStorage.getItem('favoriteBeers');
-    if (favoriteBeers) this.setFavoriteBeersInStore(JSON.parse(favoriteBeers));
   },
 };
 </script>

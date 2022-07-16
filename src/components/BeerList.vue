@@ -46,9 +46,9 @@ export default {
       this.$api.beers
         .getAll({
           per_page: beersPerPage,
-          page: this.currentPage,
-          ...(this.abvRange.min !== 0 &&
-            this.abvRange.max !== 0 && { abv_gt: this.abvRange.min, abv_lt: this.abvRange.max }),
+          page: this.page,
+          ...(this.minAbvValue !== 0 &&
+            this.maxAbvValue !== 0 && { abv_gt: this.minAbvValue, abv_lt: this.maxAbvValue }),
           ...(this.searchQuery && { beer_name: this.searchQuery }),
           ...(this.brewedAfter && {
             brewed_after: this.brewedAfter.split('-').reverse().join('-'),
@@ -70,29 +70,22 @@ export default {
   },
   computed: {
     ...mapGetters({
-      currentPage: 'page/page',
-      searchQuery: 'search/search',
-      abvRange: 'abvRange/abvRange',
-      brewedAfter: 'brewedDate/getInitialMonth',
-      brewedBefore: 'brewedDate/getFinalMonth',
+      page: 'filter/page',
+      searchQuery: 'filter/searchQuery',
+      minAbvValue: 'filter/minAbvValue',
+      maxAbvValue: 'filter/maxAbvValue',
+      brewedAfter: 'filter/initialBrewedMonth',
+      brewedBefore: 'filter/finalBrewedMonth',
+      filterStore: 'filter/filterStore',
     }),
   },
   watch: {
-    currentPage() {
+    filterStore() {
       this.fetchBeers();
     },
-    searchQuery() {
-      this.fetchBeers();
-    },
-    abvRange() {
-      this.fetchBeers();
-    },
-    brewedAfter() {
-      this.fetchBeers();
-    },
-    brewedBefore() {
-      this.fetchBeers();
-    },
+  },
+  mounted() {
+    this.fetchBeers();
   },
 };
 </script>
