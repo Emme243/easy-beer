@@ -1,3 +1,4 @@
+import { favoriteBeersStore } from '@/store/favoriteBeers';
 import { abvRangeStore } from '@/store/filtering/abvRange';
 import { brewedDateStore } from '@/store/filtering/brewedDate';
 import { pageStore } from '@/store/filtering/page';
@@ -13,5 +14,6 @@ export default new Vuex.Store({
     brewedDate: brewedDateStore,
     page: pageStore,
     search: searchStore,
+    favoriteBeers: favoriteBeersStore,
   },
 });

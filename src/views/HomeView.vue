@@ -1,8 +1,6 @@
 <template>
   <v-app>
-    <v-main>
-      <BeerLayout />
-    </v-main>
+    <BeerLayout />
   </v-app>
 </template>
 

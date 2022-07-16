@@ -3,7 +3,8 @@
     <h1 class="text-h2">Easy Beer 🍻</h1>
     <p class="mt-3">Encuentra la cerveza que más te guste 😋</p>
 
-    <div class="beerLayout__search align-center px-6 d-flex">
+    <div class="navbar align-center px-6 d-flex">
+      <FavsModal class="mr-5" />
       <BeerSearch class="mr-3" />
       <FilterModal>
         <BeerABVRange />
@@ -13,12 +14,15 @@
       </FilterModal>
       <ResetAllFiltersButton class="ml-3" />
     </div>
-    <BeerList />
+    <v-main>
+      <BeerList />
+    </v-main>
     <BeerPagination />
   </v-container>
 </template>
 
 <script>
+import FavsModal from '@/components/FavsModal';
 import BeerBrewedDateContainer from '@/components/Filters/BrewedDate/BeerBrewedDateContainer';
 import { mapActions, mapGetters } from 'vuex';
 import BeerABVRange from '@/components/Filters/BeerABVRange';
@@ -31,6 +35,7 @@ import BeerSearch from '@/components/Filters/BeerSearch';
 export default {
   name: 'BeerLayout',
   components: {
+    FavsModal,
     BeerBrewedDateContainer,
     BeerABVRange,
     ResetAllFiltersButton,
@@ -77,7 +82,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.beerLayout__search {
+.navbar {
   position: sticky;
   top: 0;
   background-color: rgba(256, 256, 256, 0.9);

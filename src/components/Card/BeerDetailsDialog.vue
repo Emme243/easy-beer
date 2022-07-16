@@ -14,7 +14,7 @@
     </template>
 
     <v-card max-height="80vh">
-      <v-toolbar dark color="primary darken-4">
+      <v-toolbar dark color="primary darken-1">
         <v-btn icon dark @click="isDialogOpen = false">
           <v-icon small>fa fa-times</v-icon>
         </v-btn>
@@ -67,7 +67,7 @@
       <v-divider />
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="blue darken-4" outlined depressed @click="isDialogOpen = false">
+        <v-btn color="blue darken-1" outlined depressed @click="isDialogOpen = false">
           <span>Cerrar</span>
           <v-icon right>fa fa-times</v-icon>
         </v-btn>

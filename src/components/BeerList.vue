@@ -40,6 +40,7 @@ export default {
   },
   methods: {
     fetchBeers() {
+      console.log('fetchBeers');
       this.isLoading = true;
       this.hasError = false;
       this.$api.beers
