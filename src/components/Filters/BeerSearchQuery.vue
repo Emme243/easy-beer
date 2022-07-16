@@ -17,11 +17,11 @@ export default {
   methods: {
     ...mapActions({
       setSearchQueryInStore: 'filter/setSearchQuery',
-      setPageInStore: 'filter/setPage',
+      resetPageInStore: 'filter/resetPage',
     }),
     handleSearchQueryChange(searchQuery) {
       this.setSearchQueryInStore(searchQuery);
-      this.setPageInStore(1);
+      this.resetPageInStore();
     },
   },
   computed: mapGetters({ searchQuery: 'filter/searchQuery' }),

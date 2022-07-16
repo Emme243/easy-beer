@@ -3,6 +3,14 @@ export const brewedDateStore = {
     initialBrewedMonth: '',
     finalBrewedMonth: '',
   }),
+  getters: {
+    initialBrewedMonth(state) {
+      return state.initialBrewedMonth;
+    },
+    finalBrewedMonth(state) {
+      return state.finalBrewedMonth;
+    },
+  },
   mutations: {
     setInitialBrewedMonth(state, month) {
       state.initialBrewedMonth = month;
@@ -12,23 +20,15 @@ export const brewedDateStore = {
     },
   },
   actions: {
-    setInitialBrewedMonth({ commit }, month) {
+    setInitialBrewedMonth({ commit, dispatch }, month) {
       commit('setInitialBrewedMonth', month || '');
     },
-    setFinalBrewedMonth({ commit }, month) {
+    setFinalBrewedMonth({ commit, dispatch }, month) {
       commit('setFinalBrewedMonth', month || '');
     },
-    resetBrewedDate({ commit }) {
+    resetBrewedDate({ commit, dispatch }) {
       commit('setInitialBrewedMonth', '');
       commit('setFinalBrewedMonth', '');
-    },
-  },
-  getters: {
-    initialBrewedMonth(state) {
-      return state.initialBrewedMonth;
-    },
-    finalBrewedMonth(state) {
-      return state.finalBrewedMonth;
     },
   },
 };

@@ -43,6 +43,7 @@ export default {
       console.log('fetchBeers');
       this.isLoading = true;
       this.hasError = false;
+
       this.$api.beers
         .getAll({
           per_page: beersPerPage,
@@ -83,9 +84,6 @@ export default {
     filterStore() {
       this.fetchBeers();
     },
-  },
-  mounted() {
-    this.fetchBeers();
   },
 };
 </script>

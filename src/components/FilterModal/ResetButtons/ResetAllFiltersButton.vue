@@ -36,11 +36,7 @@ export default {
       default: 'red darken-3',
     },
   },
-  data() {
-    return {
-      isAlertShown: false,
-    };
-  },
+  data: () => ({ isAlertShown: false }),
   methods: {
     ...mapActions({ resetAllFilters: 'filter/resetAllFilters' }),
     resetAllFiltersAndSearchBar() {

@@ -1,6 +1,6 @@
 export const paginationStore = {
   state: () => ({
-    page: 1,
+    page: 0,
   }),
   getters: {
     page: state => state.page,

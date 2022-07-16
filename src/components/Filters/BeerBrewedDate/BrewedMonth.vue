@@ -60,10 +60,10 @@ export default {
   },
   data: () => ({ isModalOpen: false }),
   methods: {
-    ...mapActions({ setPaginationInStore: 'filter/setPage' }),
+    ...mapActions({ resetPageInStore: 'filter/resetPage' }),
     handleBrewedMonthChange(month) {
       this.$emit('setBrewedMonthInStore', month);
-      this.setPaginationInStore(1);
+      this.resetPageInStore();
     },
   },
 };

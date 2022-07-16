@@ -35,12 +35,12 @@ export default {
       resetAbvRangeInStore: 'filter/resetAbvRange',
       setMinAbvValueInStore: 'filter/setMinAbvValue',
       setMaxAbvValueInStore: 'filter/setMaxAbvValue',
-      setPageInStore: 'filter/setPage',
+      resetPageInStore: 'filter/resetPage',
     }),
     handleAbvRangeChange([min, max]) {
       this.setMinAbvValueInStore(min);
       this.setMaxAbvValueInStore(max);
-      this.setPageInStore(1);
+      this.resetPageInStore();
     },
   },
   computed: mapGetters({

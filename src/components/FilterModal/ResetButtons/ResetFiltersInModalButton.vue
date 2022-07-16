@@ -16,9 +16,7 @@ export default {
       default: false,
     },
   },
-  methods: mapActions({
-    resetFiltersInFilterModal: 'filter/resetFiltersInFilterModal',
-  }),
+  methods: mapActions({ resetFiltersInFilterModal: 'filter/resetFiltersInFilterModal' }),
 };
 </script>
 
