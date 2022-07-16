@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import BrewedMonth from '@/components/Filters/BeerBrewedDate/BrewedMonth';
+import BrewedMonth from '@/components/BeerFilters/BrewedDateFilter/BrewedMonth';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {

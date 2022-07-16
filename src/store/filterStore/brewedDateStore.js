@@ -26,7 +26,7 @@ export const brewedDateStore = {
     setFinalBrewedMonth({ commit, dispatch }, month) {
       commit('setFinalBrewedMonth', month || '');
     },
-    resetBrewedDate({ commit, dispatch }) {
+    resetBrewedDate({ commit }) {
       commit('setInitialBrewedMonth', '');
       commit('setFinalBrewedMonth', '');
     },

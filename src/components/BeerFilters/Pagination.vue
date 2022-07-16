@@ -15,7 +15,7 @@
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
-  name: 'BeerPagination',
+  name: 'Pagination',
   data: () => ({ totalOfPages: 8 }),
   methods: mapActions({ setPageInStore: 'filter/setPage' }),
   computed: mapGetters({ page: 'filter/page' }),

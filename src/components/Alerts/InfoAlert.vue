@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: 'Alert',
+  name: 'InfoAlert',
   props: ['isAlertShown', 'color'],
   model: {
     prop: 'isAlertShown',

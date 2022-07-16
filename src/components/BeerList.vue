@@ -15,22 +15,22 @@
   <v-alert v-else-if="beers.length === 0" type="info">
     <h3 class="text-h5">No hay cervezas que mostrar con el criterio solicitado.</h3>
     <span>Intenta reducir los criterios de búsqueda (barra de búsqueda y filtros)</span>
-    <ResetAllFiltersButton color="blue darken-4" />
+    <ResetAllBeerFiltersBtn color="blue darken-4" />
   </v-alert>
   <div v-else class="grid-list mb-3 mt-5">
-    <BeerCard v-for="beer in beers" :key="`${beer.id}-${beer.name}`" :beer="beer" />
+    <BeerInfoCard v-for="beer in beers" :key="`${beer.id}-${beer.name}`" :beer="beer" />
   </div>
 </template>
 
 <script>
-import BeerCard from '@/components/Card/BeerCard';
-import ResetAllFiltersButton from '@/components/FilterModal/ResetButtons/ResetAllFiltersButton';
+import BeerInfoCard from '@/components/Cards/BeerInfoCard';
+import ResetAllBeerFiltersBtn from '@/components/Buttons/ResetAllBeerFiltersBtn';
 import { mapGetters } from 'vuex';
 
 const beersPerPage = 15;
 export default {
   name: 'BeerList',
-  components: { ResetAllFiltersButton, BeerCard },
+  components: { ResetAllBeerFiltersBtn, BeerInfoCard },
   data() {
     return {
       hasError: false,
@@ -55,29 +55,36 @@ export default {
           this.isLoading = false;
         });
     },
+    updateQueryParamsInUrl() {
+      const newQueryParams = Object.entries(this.filterStore).reduce(
+        (queryParams, [key, value]) => {
+          if (!!value) queryParams[key] = value + '';
+          else delete queryParams[key];
+          return queryParams;
+        },
+        {}
+      );
+      if (JSON.stringify(newQueryParams) !== JSON.stringify(this.$route.query))
+        this.$router.push({ query: newQueryParams });
+    },
   },
   computed: {
-    ...mapGetters({
-      page: 'filter/page',
-      searchQuery: 'filter/searchQuery',
-      minAbvValue: 'filter/minAbvValue',
-      maxAbvValue: 'filter/maxAbvValue',
-      brewedAfter: 'filter/initialBrewedMonth',
-      brewedBefore: 'filter/finalBrewedMonth',
-      filterStore: 'filter/filterStore',
-    }),
+    ...mapGetters({ filterStore: 'filter/filterStore' }),
     apiQueryParams() {
       return {
         per_page: beersPerPage,
-        page: this.page,
-        ...(this.minAbvValue !== 0 &&
-          this.maxAbvValue !== 0 && { abv_gt: this.minAbvValue, abv_lt: this.maxAbvValue }),
-        ...(this.searchQuery && { beer_name: this.searchQuery }),
-        ...(this.brewedAfter && {
-          brewed_after: this.brewedAfter.split('-').reverse().join('-'),
+        page: this.filterStore.page,
+        ...(this.filterStore.minAbvValue !== 0 &&
+          this.filterStore.maxAbvValue !== 0 && {
+            abv_gt: this.filterStore.minAbvValue,
+            abv_lt: this.filterStore.maxAbvValue,
+          }),
+        ...(this.filterStore.searchQuery && { beer_name: this.filterStore.searchQuery }),
+        ...(this.filterStore.initialBrewedMonth && {
+          brewed_after: this.filterStore.initialBrewedMonth.split('-').reverse().join('-'),
         }),
-        ...(this.brewedBefore && {
-          brewed_before: this.brewedBefore.split('-').reverse().join('-'),
+        ...(this.filterStore.finalBrewedMonth && {
+          brewed_before: this.filterStore.finalBrewedMonth.split('-').reverse().join('-'),
         }),
       };
     },
@@ -101,6 +108,12 @@ export default {
     //       centralizadas en un solo objeto que las contiene.
     filterStore() {
       this.fetchBeers();
+
+      // NOTE: Cada vez que haya un cambió en el estado de los filtros,
+      //       se actualiza el query route con la información del mismo,
+      //       por lo que el query route solo se actualiza desde un solo lugar (aquí)
+      //       y no desde cada componente que tenga el estado de los filtros.
+      this.updateQueryParamsInUrl();
     },
   },
 };

@@ -9,7 +9,7 @@
 import { mapActions } from 'vuex';
 
 export default {
-  name: 'ResetFiltersInModalButton',
+  name: 'ResetBeerModalFiltersBtn',
   props: {
     disabled: {
       type: Boolean,

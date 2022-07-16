@@ -13,7 +13,7 @@
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
-  name: 'BeerSearchQuery',
+  name: 'SearchQuery',
   methods: {
     ...mapActions({
       setSearchQueryInStore: 'filter/setSearchQuery',

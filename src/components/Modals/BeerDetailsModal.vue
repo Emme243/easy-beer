@@ -1,10 +1,10 @@
 <template>
   <v-dialog
-    v-model="isModalOpen"
-    transition="dialog-bottom-transition"
     :overlay-opacity="0.2"
     max-width="700px"
     scrollable
+    transition="dialog-bottom-transition"
+    v-model="isModalOpen"
   >
     <template #activator="{ on, attrs }">
       <div v-bind="attrs" v-on="on" class="white--text text-h6 d-flex align-center">
@@ -20,7 +20,7 @@
         </v-btn>
         <v-toolbar-title>{{ beer.name }}</v-toolbar-title>
         <v-spacer></v-spacer>
-        <AddToFavsButton :beer="beer" />
+        <AddBeerToFavsBtn :beer="beer" />
       </v-toolbar>
 
       <v-card-text class="pt-5 filterContent">
@@ -30,7 +30,12 @@
             <h3 class="text-h6">{{ beer.name }}</h3>
           </v-col>
           <v-col cols="12">
-            <v-img :src="beer.image_url" max-width="100px" class="v-img-center" />
+            <v-img
+              :alt="beerFullName"
+              :src="beer.image_url"
+              class="v-img-center"
+              max-width="100px"
+            />
           </v-col>
         </v-row>
         <v-divider class="my-3"></v-divider>
@@ -41,7 +46,7 @@
         <v-divider class="my-3"></v-divider>
         <div>
           <h3 class="text-h6">Fecha de elaboración</h3>
-          <p class="ma-0">{{ firstBrewed }}</p>
+          <p class="ma-0">{{ brewedDate }}</p>
         </div>
         <v-divider class="my-3"></v-divider>
         <div>
@@ -77,24 +82,20 @@
 </template>
 
 <script>
-import AddToFavsButton from '@/components/Card/AddToFavsButton';
-export default {
-  name: 'BeerDetailsDialog',
-  components: { AddToFavsButton },
+import AddBeerToFavsBtn from '@/components/Buttons/AddBeerToFavsBtn';
 
+export default {
+  name: 'BeerDetailsModal',
+  components: { AddBeerToFavsBtn },
   props: {
     beer: {
       type: Object,
       required: true,
     },
   },
-  data() {
-    return {
-      isModalOpen: false,
-    };
-  },
+  data: () => ({ isModalOpen: false }),
   computed: {
-    firstBrewed() {
+    brewedDate() {
       const [month, year] = this.beer.first_brewed.split('/');
       const date = new Date(year, month - 1);
       const options = { year: 'numeric', month: 'long' };
@@ -110,6 +111,9 @@ export default {
         hop => `${hop.name} (${hop.amount.value} ${hop.amount.unit})`
       );
       return [...maltList, ...hopsList];
+    },
+    beerFullName() {
+      return `${this.beer.id} - ${this.beer.name}`;
     },
   },
 };

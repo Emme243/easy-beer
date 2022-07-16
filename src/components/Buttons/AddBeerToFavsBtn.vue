@@ -14,7 +14,7 @@
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
-  name: 'AddToFavsButton',
+  name: 'AddBeerToFavsBtn',
   props: {
     beer: {
       type: Object,

@@ -1,21 +1,21 @@
 <template>
   <v-card :elevation="0" outlined rounded>
-    <v-img height="250" :src="beer.image_url">
+    <v-img height="250" :src="beer.image_url" :alt="beerFullName">
       <v-app-bar :elevation="0" color="rgba(25,118,210, .7)" height="50">
-        <BeerDetailsDialog :beer="beer" />
+        <BeerDetailsModal :beer="beer" />
         <v-spacer />
-        <AddToFavsButton :beer="beer" />
+        <AddBeerToFavsBtn :beer="beer" />
       </v-app-bar>
     </v-img>
     <v-card-title class="text-left">
       <v-tooltip bottom max-width="300px">
         <template #activator="{ on, attrs }">
           <h3 v-bind="attrs" v-on="on" class="text-h5 text-truncate">
-            {{ beer.id }} - {{ beer.name }}
+            {{ beerFullName }}
           </h3>
         </template>
 
-        <span>{{ beer.id }} - {{ beer.name }}</span>
+        <span>{{ beerFullName }}</span>
       </v-tooltip>
     </v-card-title>
     <v-card-subtitle class="text-left">
@@ -33,16 +33,21 @@
 </template>
 
 <script>
-import BeerDetailsDialog from '@/components/Card/BeerDetailsDialog';
-import AddToFavsButton from '@/components/Card/AddToFavsButton';
+import BeerDetailsModal from '@/components/Modals/BeerDetailsModal';
+import AddBeerToFavsBtn from '@/components/Buttons/AddBeerToFavsBtn';
 
 export default {
-  name: 'BeerCard',
-  components: { AddToFavsButton, BeerDetailsDialog },
+  name: 'BeerInfoCard',
+  components: { AddBeerToFavsBtn, BeerDetailsModal },
   props: {
     beer: {
       type: Object,
       required: true,
+    },
+  },
+  computed: {
+    beerFullName() {
+      return `${this.beer.id} - ${this.beer.name}`;
     },
   },
 };
