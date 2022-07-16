@@ -1,6 +1,6 @@
 <template>
   <v-dialog
-    v-model="isDialogOpen"
+    v-model="isModalOpen"
     transition="dialog-bottom-transition"
     :overlay-opacity="0.2"
     max-width="700px"
@@ -15,7 +15,7 @@
 
     <v-card max-height="80vh">
       <v-toolbar dark color="primary darken-1">
-        <v-btn icon dark @click="isDialogOpen = false">
+        <v-btn icon dark @click="isModalOpen = false">
           <v-icon small>fa fa-times</v-icon>
         </v-btn>
         <v-toolbar-title>{{ beer.name }}</v-toolbar-title>
@@ -67,7 +67,7 @@
       <v-divider />
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="blue darken-1" outlined depressed @click="isDialogOpen = false">
+        <v-btn color="blue darken-1" outlined depressed @click="isModalOpen = false">
           <span>Cerrar</span>
           <v-icon right>fa fa-times</v-icon>
         </v-btn>
@@ -90,7 +90,7 @@ export default {
   },
   data() {
     return {
-      isDialogOpen: false,
+      isModalOpen: false,
     };
   },
   computed: {

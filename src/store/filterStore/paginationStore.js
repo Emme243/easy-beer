@@ -1,5 +1,4 @@
-export const pageStore = {
-  namespaced: true,
+export const paginationStore = {
   state: () => ({
     page: 0,
   }),
@@ -13,7 +12,10 @@ export const pageStore = {
   },
   actions: {
     setPage({ commit }, page) {
-      commit('setPage', page);
+      commit('setPage', +page || 1);
+    },
+    resetPage({ commit }) {
+      commit('setPage', 1);
     },
   },
 };

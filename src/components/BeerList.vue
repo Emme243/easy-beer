@@ -44,19 +44,7 @@ export default {
       this.isLoading = true;
       this.hasError = false;
       this.$api.beers
-        .getAll({
-          per_page: beersPerPage,
-          page: this.currentPage,
-          ...(this.abvRange.min !== 0 &&
-            this.abvRange.max !== 0 && { abv_gt: this.abvRange.min, abv_lt: this.abvRange.max }),
-          ...(this.searchQuery && { beer_name: this.searchQuery }),
-          ...(this.brewedAfter && {
-            brewed_after: this.brewedAfter.split('-').reverse().join('-'),
-          }),
-          ...(this.brewedBefore && {
-            brewed_before: this.brewedBefore.split('-').reverse().join('-'),
-          }),
-        })
+        .getAll(this.apiQueryParams)
         .then(beers => {
           this.beers = beers || [];
         })
@@ -70,27 +58,48 @@ export default {
   },
   computed: {
     ...mapGetters({
-      currentPage: 'page/page',
-      searchQuery: 'search/search',
-      abvRange: 'abvRange/abvRange',
-      brewedAfter: 'brewedDate/getInitialMonth',
-      brewedBefore: 'brewedDate/getFinalMonth',
+      page: 'filter/page',
+      searchQuery: 'filter/searchQuery',
+      minAbvValue: 'filter/minAbvValue',
+      maxAbvValue: 'filter/maxAbvValue',
+      brewedAfter: 'filter/initialBrewedMonth',
+      brewedBefore: 'filter/finalBrewedMonth',
+      filterStore: 'filter/filterStore',
     }),
+    apiQueryParams() {
+      return {
+        per_page: beersPerPage,
+        page: this.page,
+        ...(this.minAbvValue !== 0 &&
+          this.maxAbvValue !== 0 && { abv_gt: this.minAbvValue, abv_lt: this.maxAbvValue }),
+        ...(this.searchQuery && { beer_name: this.searchQuery }),
+        ...(this.brewedAfter && {
+          brewed_after: this.brewedAfter.split('-').reverse().join('-'),
+        }),
+        ...(this.brewedBefore && {
+          brewed_before: this.brewedBefore.split('-').reverse().join('-'),
+        }),
+      };
+    },
   },
   watch: {
-    currentPage() {
-      this.fetchBeers();
-    },
-    searchQuery() {
-      this.fetchBeers();
-    },
-    abvRange() {
-      this.fetchBeers();
-    },
-    brewedAfter() {
-      this.fetchBeers();
-    },
-    brewedBefore() {
+    // NOTE: Al tener solamente una propiedad reactiva (filterStore) que contiene todos los datos de filtrado,
+    //       cada vez que una propiedad de filtrado (ya sea searchQuery, minAbvValue, maxAbvValue, etc) cambia,
+    //       se hace el fetch de todas las cervezas UNA SOLA VEZ.
+    //
+    //       Anteriormente, cuando se cambiaba una propiedad de filtrado, se hacía el fetch por cada cambio que había,
+    //       es decir, cuando se cambiaba searchQuery se hacía un fetch,
+    //       cuando se cambiaba minAbvValue se hacía otro fetch, y así por cada cambio en los filtros de forma individual.
+    //       EJEMPLO: En la app, se tiene un botón que reseta los 4 tipos de filtrado en una sola vez,
+    //       por lo que al resetear los 4 filtros, se hacía el fetch de todas las cervezas 4 veces,
+    //       se escuchaban de manera individual estos filtros.
+    //
+    //       Ahora, al haber creado un único filtro reactivo (/store/filterStore.js) que contiene todos los datos de filtrado,
+    //       aun si se cambian las 4 propiedades de filtrado uno por uno,
+    //       se hace el fetch de todas las cervezas 1 VEZ,
+    //       ya que se escuchan de manera reactiva todas las propiedades de filtrado
+    //       centralizadas en un solo objeto que las contiene.
+    filterStore() {
       this.fetchBeers();
     },
   },

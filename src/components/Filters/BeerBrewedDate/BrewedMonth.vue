@@ -1,6 +1,6 @@
 <template>
   <v-dialog
-    v-model="isDialogOpen"
+    v-model="isModalOpen"
     overlay-opacity="0.3"
     :close-on-content-click="false"
     transition="scale-transition"
@@ -30,7 +30,7 @@
     >
       <v-spacer></v-spacer>
       <v-btn text color="primary" @click="handleBrewedMonthChange('')"> Limpiar </v-btn>
-      <v-btn text color="primary" @click="isDialogOpen = false"> OK </v-btn>
+      <v-btn text color="primary" @click="isModalOpen = false"> OK </v-btn>
     </v-date-picker>
   </v-dialog>
 </template>
@@ -39,7 +39,7 @@
 import { mapActions } from 'vuex';
 
 export default {
-  name: 'BeerBrewedMonth',
+  name: 'BrewedMonth',
   props: {
     inputLabel: {
       type: String,
@@ -58,12 +58,12 @@ export default {
       default: '',
     },
   },
-  data: () => ({ isDialogOpen: false }),
+  data: () => ({ isModalOpen: false }),
   methods: {
-    ...mapActions({ setPaginationInStore: 'page/setPage' }),
+    ...mapActions({ resetPageInStore: 'filter/resetPage' }),
     handleBrewedMonthChange(month) {
       this.$emit('setBrewedMonthInStore', month);
-      this.setPaginationInStore(1);
+      this.resetPageInStore();
     },
   },
 };

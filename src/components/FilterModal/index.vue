@@ -1,6 +1,6 @@
 <template>
   <v-dialog
-    v-model="isDialogOpen"
+    v-model="isModalOpen"
     transition="dialog-bottom-transition"
     :overlay-opacity="0.2"
     max-width="500"
@@ -29,7 +29,7 @@
 
     <v-card>
       <v-toolbar dark color="primary">
-        <v-btn icon dark @click="isDialogOpen = false">
+        <v-btn icon dark @click="isModalOpen = false">
           <v-icon small>fa fa-times</v-icon>
         </v-btn>
         <v-toolbar-title> Filtros de búsqueda ({{ numberOfFiltersApplied }}) </v-toolbar-title>
@@ -44,11 +44,8 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <ResetModalFiltersButton
-          :disabled="numberOfFiltersApplied === 0"
-          @resetFiltersInModal="resetFiltersInDialog"
-        />
-        <v-btn color="blue" dark depressed @click="isDialogOpen = false">
+        <ResetFiltersInModalButton :disabled="numberOfFiltersApplied === 0" />
+        <v-btn class="ml-3" color="blue" dark depressed @click="isModalOpen = false">
           <span>OK</span>
           <v-icon right>fa fa-check</v-icon>
         </v-btn>
@@ -58,42 +55,41 @@
 </template>
 
 <script>
-import ResetModalFiltersButton from '@/components/FilterModal/ResetButtons/ResetModalFiltersButton';
+import ResetFiltersInModalButton from '@/components/FilterModal/ResetButtons/ResetFiltersInModalButton';
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
-  name: 'FilterModal',
-  components: { ResetModalFiltersButton },
+  name: 'BeerFilterModal',
+  components: { ResetFiltersInModalButton },
   data() {
     return {
-      isDialogOpen: false,
+      isModalOpen: false,
     };
   },
   methods: {
     ...mapActions({
-      resetAbvRangeInStore: 'abvRange/resetAbvRange',
-      resetBrewedDateInStore: 'brewedDate/resetBrewedDate',
-      setCurrentPageInStore: 'page/setPage',
+      resetAbvRangeInStore: 'filter/resetAbvRange',
+      resetBrewedDateInStore: 'filter/resetBrewedDate',
+      setPageInStore: 'filter/setPage',
     }),
-    resetFiltersInDialog() {
-      this.resetAbvRangeInStore();
-      this.resetBrewedDateInStore();
-      this.setCurrentPageInStore(1);
-    },
   },
   computed: {
     ...mapGetters({
-      abvRange: 'abvRange/abvRange',
-      minAbvValue: 'abvRange/minAbvValue',
-      maxAbvValue: 'abvRange/maxAbvValue',
-      brewedInitialMonth: 'brewedDate/getInitialMonth',
-      brewedFinalMonth: 'brewedDate/getFinalMonth',
+      minAbvValue: 'filter/minAbvValue',
+      maxAbvValue: 'filter/maxAbvValue',
+      minAbvDefaultValue: 'filter/minAbvDefaultValue',
+      maxAbvDefaultValue: 'filter/maxAbvDefaultValue',
+      initialBrewedMonth: 'filter/initialBrewedMonth',
+      finalBrewedMonth: 'filter/finalBrewedMonth',
     }),
     numberOfFiltersApplied() {
       let numberOfFiltersApplied = 0;
-      if (this.abvRange.min !== this.minAbvValue || this.abvRange.max !== this.maxAbvValue)
+      if (
+        this.minAbvValue !== this.minAbvDefaultValue ||
+        this.maxAbvValue !== this.maxAbvDefaultValue
+      )
         numberOfFiltersApplied++;
-      if (this.brewedInitialMonth || this.brewedFinalMonth) numberOfFiltersApplied++;
+      if (this.initialBrewedMonth || this.finalBrewedMonth) numberOfFiltersApplied++;
       return numberOfFiltersApplied;
     },
   },

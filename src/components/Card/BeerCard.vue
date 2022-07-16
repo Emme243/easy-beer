@@ -1,7 +1,7 @@
 <template>
   <v-card :elevation="0" outlined rounded>
     <v-img height="250" :src="beer.image_url">
-      <v-app-bar :elevation="0" color="rgba(0, 0, 0, .8)" height="50">
+      <v-app-bar :elevation="0" color="rgba(25,118,210, .7)" height="50">
         <BeerDetailsDialog :beer="beer" />
         <v-spacer />
         <AddToFavsButton :beer="beer" />
