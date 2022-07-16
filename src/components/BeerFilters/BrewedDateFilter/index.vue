@@ -20,13 +20,13 @@
 </template>
 
 <script>
-import FinalBrewedMonth from '@/components/Filters/BeerBrewedDate/FinalBrewedMonth';
-import InitialBrewedMonth from '@/components/Filters/BeerBrewedDate/InitialBrewedMonth';
+import FinalBrewedMonth from '@/components/BeerFilters/BrewedDateFilter/FinalBrewedMonth';
+import InitialBrewedMonth from '@/components/BeerFilters/BrewedDateFilter/InitialBrewedMonth';
 import { mapGetters } from 'vuex';
 import { mapActions } from 'vuex';
 
 export default {
-  name: 'BeerBrewedDateContainer',
+  name: 'BrewedDateFilter',
   components: { FinalBrewedMonth, InitialBrewedMonth },
   methods: {
     ...mapActions({

@@ -44,7 +44,7 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <ResetFiltersInModalButton :disabled="numberOfFiltersApplied === 0" />
+        <ResetBeerModalFiltersBtn :disabled="numberOfFiltersApplied === 0" />
         <v-btn class="ml-3" color="blue" dark depressed @click="isModalOpen = false">
           <span>OK</span>
           <v-icon right>fa fa-check</v-icon>
@@ -55,17 +55,13 @@
 </template>
 
 <script>
-import ResetFiltersInModalButton from '@/components/FilterModal/ResetButtons/ResetFiltersInModalButton';
+import ResetBeerModalFiltersBtn from '@/components/Buttons/ResetBeerModalFiltersBtn';
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
-  name: 'BeerFilterModal',
-  components: { ResetFiltersInModalButton },
-  data() {
-    return {
-      isModalOpen: false,
-    };
-  },
+  name: 'BeerFiltersModal',
+  components: { ResetBeerModalFiltersBtn },
+  data: () => ({ isModalOpen: false }),
   methods: {
     ...mapActions({
       resetAbvRangeInStore: 'filter/resetAbvRange',

@@ -49,8 +49,8 @@
           <v-alert color="deep-purple lighten-1" type="info" v-if="isFavoriteBeersEmpty">
             No tienes cervezas favoritas por el momento.
           </v-alert>
-          <div class="favsModal__beers" v-else>
-            <BeerCard v-for="beer in favoriteBeersInStore" :key="beer.id" :beer="beer" />
+          <div class="beerFavoritesModal__beerCards" v-else>
+            <BeerInfoCard v-for="beer in favoriteBeersInStore" :key="beer.id" :beer="beer" />
           </div>
         </v-card-text>
 
@@ -78,18 +78,13 @@
 </template>
 
 <script>
-import BeerCard from '@/components/Card/BeerCard';
+import BeerInfoCard from '@/components/Cards/BeerInfoCard';
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
-  name: 'FavoriteBeersModal',
-  components: { BeerCard },
-
-  data() {
-    return {
-      isModalOpen: false,
-    };
-  },
+  name: 'BeerFavoritesModal',
+  components: { BeerInfoCard },
+  data: () => ({ isModalOpen: false }),
   methods: mapActions({
     resetFavoriteBeersInStore: 'favoriteBeers/resetFavoriteBeers',
   }),
@@ -113,7 +108,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.favsModal__beers {
+.beerFavoritesModal__beerCards {
   & > *:not(:last-child) {
     margin-bottom: 20px;
   }

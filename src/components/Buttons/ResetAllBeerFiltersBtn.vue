@@ -17,19 +17,19 @@
       <span>Limpiar TODOS los filtros de búsqueda</span>
     </v-tooltip>
 
-    <Alert v-model="isAlertShown" color="red darken-3">
+    <InfoAlert v-model="isAlertShown" color="red darken-3">
       Se han limpiado TODOS los filtros de búsqueda.
-    </Alert>
+    </InfoAlert>
   </div>
 </template>
 
 <script>
-import Alert from '@/components/UI/Alert';
+import InfoAlert from '@/components/Alerts/InfoAlert';
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
-  name: 'ResetAllFiltersButton',
-  components: { Alert },
+  name: 'ResetAllBeerFiltersBtn',
+  components: { InfoAlert },
   props: {
     color: {
       type: String,

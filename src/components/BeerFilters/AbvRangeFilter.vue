@@ -29,7 +29,7 @@
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
-  name: 'BeerAbvRange',
+  name: 'AbvRangeFilter',
   methods: {
     ...mapActions({
       resetAbvRangeInStore: 'filter/resetAbvRange',
