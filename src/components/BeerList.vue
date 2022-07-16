@@ -43,21 +43,8 @@ export default {
       console.log('fetchBeers');
       this.isLoading = true;
       this.hasError = false;
-
       this.$api.beers
-        .getAll({
-          per_page: beersPerPage,
-          page: this.page,
-          ...(this.minAbvValue !== 0 &&
-            this.maxAbvValue !== 0 && { abv_gt: this.minAbvValue, abv_lt: this.maxAbvValue }),
-          ...(this.searchQuery && { beer_name: this.searchQuery }),
-          ...(this.brewedAfter && {
-            brewed_after: this.brewedAfter.split('-').reverse().join('-'),
-          }),
-          ...(this.brewedBefore && {
-            brewed_before: this.brewedBefore.split('-').reverse().join('-'),
-          }),
-        })
+        .getAll(this.apiQueryParams)
         .then(beers => {
           this.beers = beers || [];
         })
@@ -79,6 +66,21 @@ export default {
       brewedBefore: 'filter/finalBrewedMonth',
       filterStore: 'filter/filterStore',
     }),
+    apiQueryParams() {
+      return {
+        per_page: beersPerPage,
+        page: this.page,
+        ...(this.minAbvValue !== 0 &&
+          this.maxAbvValue !== 0 && { abv_gt: this.minAbvValue, abv_lt: this.maxAbvValue }),
+        ...(this.searchQuery && { beer_name: this.searchQuery }),
+        ...(this.brewedAfter && {
+          brewed_after: this.brewedAfter.split('-').reverse().join('-'),
+        }),
+        ...(this.brewedBefore && {
+          brewed_before: this.brewedBefore.split('-').reverse().join('-'),
+        }),
+      };
+    },
   },
   watch: {
     filterStore() {
