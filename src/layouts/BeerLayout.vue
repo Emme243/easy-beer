@@ -22,15 +22,15 @@
 </template>
 
 <script>
-import FavoriteBeersModal from '@/components/FavoriteBeersModal';
-import BeerBrewedDateContainer from '@/components/Filters/BeerBrewedDate/BeerBrewedDateContainer';
-import { mapActions, mapGetters } from 'vuex';
 import BeerAbvRange from '@/components/Filters/BeerAbvRange';
-import ResetAllFiltersButton from '@/components/FilterModal/ResetButtons/ResetAllFiltersButton';
+import BeerBrewedDateContainer from '@/components/Filters/BeerBrewedDate/BeerBrewedDateContainer';
 import BeerFilterModal from '@/components/FilterModal';
 import BeerList from '@/components/BeerList';
 import BeerPagination from '@/components/Filters/BeerPagination';
 import BeerSearchQuery from '@/components/Filters/BeerSearchQuery';
+import FavoriteBeersModal from '@/components/FavoriteBeersModal';
+import ResetAllFiltersButton from '@/components/FilterModal/ResetButtons/ResetAllFiltersButton';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'BeerLayout',
@@ -52,6 +52,10 @@ export default {
     filterStore: 'filter/filterStore',
   }),
   watch: {
+    // NOTE: Cada vez que haya un cambió en el estado de los filtros,
+    //       se actualiza el query route con la información del mismo,
+    //       por lo que el query route solo se actualiza desde un solo lugar
+    //       y no desde cada componente que tenga el estado de los filtros.
     filterStore(newFilterStore) {
       const newQueryParams = Object.entries(newFilterStore).reduce((queryParams, [key, value]) => {
         if (!!value) queryParams[key] = value + '';
@@ -66,6 +70,7 @@ export default {
     // NOTE: En este punto ya se ha cargado el componente BeerLayout.vue
     //       y se puede acceder a los datos de filtrado en la query de la url,
     //       por lo que podemos setear esos valores en el store.
+    //       De este modo, cada vez que el usuario refresque la página, no perderá los filtros.
     this.setAllFiltersInStore(this.$route.query);
 
     // NOTE: También podemos traer todas las cervezas marcadas como favoritas

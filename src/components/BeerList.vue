@@ -83,6 +83,22 @@ export default {
     },
   },
   watch: {
+    // NOTE: Al tener solamente una propiedad reactiva (filterStore) que contiene todos los datos de filtrado,
+    //       cada vez que una propiedad de filtrado (ya sea searchQuery, minAbvValue, maxAbvValue, etc) cambia,
+    //       se hace el fetch de todas las cervezas UNA SOLA VEZ.
+    //
+    //       Anteriormente, cuando se cambiaba una propiedad de filtrado, se hacía el fetch por cada cambio que había,
+    //       es decir, cuando se cambiaba searchQuery se hacía un fetch,
+    //       cuando se cambiaba minAbvValue se hacía otro fetch, y así por cada cambio en los filtros de forma individual.
+    //       EJEMPLO: En la app, se tiene un botón que reseta los 4 tipos de filtrado en una sola vez,
+    //       por lo que al resetear los 4 filtros, se hacía el fetch de todas las cervezas 4 veces,
+    //       se escuchaban de manera individual estos filtros.
+    //
+    //       Ahora, al haber creado un único filtro reactivo (/store/filterStore.js) que contiene todos los datos de filtrado,
+    //       aun si se cambian las 4 propiedades de filtrado uno por uno,
+    //       se hace el fetch de todas las cervezas 1 VEZ,
+    //       ya que se escuchan de manera reactiva todas las propiedades de filtrado
+    //       centralizadas en un solo objeto que las contiene.
     filterStore() {
       this.fetchBeers();
     },
