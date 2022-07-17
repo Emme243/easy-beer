@@ -101,4 +101,10 @@ describe('Vuex - Pruebas en el estado de los filtros de cerveza (filterStore)', 
     const filter = store.getters['filter/filterStore'];
     expect(filter).toEqual(newFilterStore);
   });
+
+  it('Debe setear todos los filtros a sus valores por defecto cuando se pase un objeto vacío con la acción setAllFilters, tener en cuenta que la page será 1', function () {
+    store.dispatch('filter/setAllFilters', {});
+    const filter = store.getters['filter/filterStore'];
+    expect(filter).toEqual({ ...filterStoreWithDefaultValues, page: 1 });
+  });
 });
