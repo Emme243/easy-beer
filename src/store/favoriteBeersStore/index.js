@@ -3,6 +3,16 @@ export const favoriteBeersStore = {
   state: {
     favoriteBeers: [],
   },
+  getters: {
+    getAllFavoriteBeers(state) {
+      return state.favoriteBeers;
+    },
+    isBeerInFavorites(state) {
+      return id => {
+        return state.favoriteBeers.some(beer => beer.id === id);
+      };
+    },
+  },
   mutations: {
     addBeerToFavorites(state, beer) {
       state.favoriteBeers.push(beer);
@@ -18,27 +28,16 @@ export const favoriteBeersStore = {
     },
   },
   actions: {
-    addBeerToFavorites({ commit }, beer) {
-      commit('addBeerToFavorites', beer);
-    },
-    removeBeerFromFavorites({ commit }, beerId) {
-      commit('removeBeerFromFavorites', beerId);
+    handleBeerInFavorites({ commit, getters }, beer) {
+      const isBeerInFavorites = getters.isBeerInFavorites(beer.id);
+      if (isBeerInFavorites) commit('removeBeerFromFavorites', beer.id);
+      else commit('addBeerToFavorites', beer);
     },
     setFavoriteBeers({ commit }, beers) {
       commit('setFavoriteBeers', beers);
     },
     resetFavoriteBeers({ commit }) {
       commit('resetFavoriteBeers');
-    },
-  },
-  getters: {
-    getAllFavoriteBeers(state) {
-      return state.favoriteBeers;
-    },
-    isBeerInFavorites(state) {
-      return id => {
-        return state.favoriteBeers.some(beer => beer.id === id);
-      };
     },
   },
 };

@@ -1,4 +1,4 @@
-import { favoriteBeersStore } from '@/store/favoriteBeers';
+import { favoriteBeersStore } from '@/store/favoriteBeersStore';
 import { filterStore } from '@/store/filterStore';
 
 import Vue from 'vue';

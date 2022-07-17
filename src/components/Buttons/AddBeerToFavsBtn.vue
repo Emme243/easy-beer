@@ -1,7 +1,7 @@
 <template>
   <v-tooltip bottom color="deep-purple" class="d-flex align-center">
     <template #activator="{ on, attrs }">
-      <button v-bind="attrs" v-on="on" @click="handleBeerInFavorites">
+      <button v-bind="attrs" v-on="on" @click="handleBeerInFavoritesInStore(beer)">
         <v-icon :color="iconColor" size="20">{{ heartIcon }}</v-icon>
       </button>
     </template>
@@ -21,16 +21,9 @@ export default {
       required: true,
     },
   },
-  methods: {
-    ...mapActions({
-      addBeerToFavoritesInStore: 'favoriteBeers/addBeerToFavorites',
-      removeBeerFromFavoritesInStore: 'favoriteBeers/removeBeerFromFavorites',
-    }),
-    handleBeerInFavorites() {
-      if (this.isBeerInFavorites) this.removeBeerFromFavoritesInStore(this.beer.id);
-      else this.addBeerToFavoritesInStore(this.beer);
-    },
-  },
+  methods: mapActions({
+    handleBeerInFavoritesInStore: 'favoriteBeers/handleBeerInFavorites',
+  }),
   computed: {
     ...mapGetters({
       isBeerInFavoritesFromStore: 'favoriteBeers/isBeerInFavorites',
@@ -45,7 +38,7 @@ export default {
       return this.isBeerInFavorites ? 'deep-purple lighten-4' : 'white';
     },
     tooltipText() {
-      return this.isBeerInFavorites ? 'Cerveza en favoritos' : 'Agregar a favoritos';
+      return this.isBeerInFavorites ? 'Añadido a favoritos' : 'Agregar a favoritos';
     },
   },
 };
