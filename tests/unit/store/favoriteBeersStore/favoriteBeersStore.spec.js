@@ -42,8 +42,13 @@ describe('Vuex - Pruebas en el estado de la cervezas que son marcadas como favor
   });
 
   // Acciones
+  it('Deberá haber llamado a la mutación setFavoriteBeers mediante la acción setFavoriteBeers', function () {
+    store.dispatch('favoriteBeers/setFavoriteBeers', beers);
+    const { favoriteBeers } = store.state.favoriteBeers;
+    expect(favoriteBeers).toEqual(beers);
+  });
+
   it('Deberá eliminar la cerveza del store si esta ya está añadida, esto mediante la acción handleBeerInFavorites', function () {
-    store.commit('favoriteBeers/setFavoriteBeers', beers);
     store.dispatch('favoriteBeers/handleBeerInFavorites', beer);
     const { favoriteBeers } = store.state.favoriteBeers;
     expect(favoriteBeers.length).toBe(beers.length - 1);
@@ -57,12 +62,6 @@ describe('Vuex - Pruebas en el estado de la cervezas que son marcadas como favor
     expect(favoriteBeers.length).toBe(beers.length);
     expect(favoriteBeers.length).toBeGreaterThan(0);
     expect(favoriteBeers).toContainEqual(beer);
-  });
-
-  it('Deberá haber llamado a la mutación setFavoriteBeers mediante la acción setFavoriteBeers', function () {
-    store.dispatch('favoriteBeers/setFavoriteBeers', beers);
-    const { favoriteBeers } = store.state.favoriteBeers;
-    expect(favoriteBeers).toEqual(beers);
   });
 
   // Getters
