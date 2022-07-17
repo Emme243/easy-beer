@@ -16,6 +16,17 @@ export const abvRangeStore = {
         state.maxAbvValue === state.maxAbvDefaultValue
       );
     },
+    newValidAbvValue(state) {
+      return (newAbvValue, type) => {
+        if (
+          +newAbvValue &&
+          +newAbvValue >= state.minAbvDefaultValue &&
+          +newAbvValue <= state.maxAbvDefaultValue
+        )
+          return +newAbvValue;
+        return type === 'min' ? state.minAbvDefaultValue : state.maxAbvDefaultValue;
+      };
+    },
   },
   mutations: {
     setMinAbvValue(state, minAbv) {
@@ -31,10 +42,10 @@ export const abvRangeStore = {
   },
   actions: {
     setMinAbvValue({ commit, getters }, minAbv) {
-      commit('setMinAbvValue', +minAbv || getters.minAbvDefaultValue);
+      commit('setMinAbvValue', getters.newValidAbvValue(minAbv, 'min'));
     },
     setMaxAbvValue({ commit, getters }, maxAbv) {
-      commit('setMaxAbvValue', +maxAbv || getters.maxAbvDefaultValue);
+      commit('setMaxAbvValue', getters.newValidAbvValue(maxAbv, 'max'));
     },
     resetAbvRange({ commit }) {
       commit('resetAbvRange');
