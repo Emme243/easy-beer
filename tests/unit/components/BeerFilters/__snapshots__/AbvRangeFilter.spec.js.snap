@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pruebas en el componente AbvRangeFilter.vue Debe hacer match con el snapshot 1`] = `
+<div>
+  <div class="d-flex align-center">
+    <h3 class="text-h6 mr-4">Volumen de alcohol</h3> <button id="reset-abv-range-btn" style="display: none;">
+      <v-icon-stub small="">fa fa-arrow-rotate-left</v-icon-stub>
+    </button>
+  </div> <span>Cantidad de alcohol en porcentaje (%) que una cerveza tiene.</span>
+  <v-range-slider-stub errorcount="1" errormessages="" messages="" rules="" successmessages="" value="2,60" backgroundcolor="" dense="true" hidedetails="true" persistenthint="true" loaderheight="2" max="60" min="2" step="1" thumblabel="true" thumbsize="32" ticklabels="" ticksize="2" data-test-id="abv-range-slider"></v-range-slider-stub> <span data-test-id="abv-info-message" class="font-weight-bold">
+    Se mostrarán cervezas con % de alcohol entre el 2% y el 60%
+  </span>
+</div>
+`;
