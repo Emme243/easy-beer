@@ -1,5 +1,12 @@
 <template>
-  <v-btn :disabled="disabled" @click="resetFiltersInFilterModal" color="blue" depressed outlined>
+  <v-btn
+    :disabled="disabled"
+    @click="() => resetFiltersInFilterModal()"
+    color="blue"
+    depressed
+    outlined
+    data-test-id="reset-modal-filters-btn"
+  >
     <span>Limpiar filtros</span>
     <v-icon right>fa fa-eraser</v-icon>
   </v-btn>
