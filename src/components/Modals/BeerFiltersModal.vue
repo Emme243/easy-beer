@@ -56,39 +56,15 @@
 
 <script>
 import ResetBeerModalFiltersBtn from '@/components/Buttons/ResetBeerModalFiltersBtn';
-import { mapActions, mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'BeerFiltersModal',
   components: { ResetBeerModalFiltersBtn },
   data: () => ({ isModalOpen: false }),
-  methods: {
-    ...mapActions({
-      resetAbvRangeInStore: 'filter/resetAbvRange',
-      resetBrewedDateInStore: 'filter/resetBrewedDate',
-      setPageInStore: 'filter/setPage',
-    }),
-  },
-  computed: {
-    ...mapGetters({
-      minAbvValue: 'filter/minAbvValue',
-      maxAbvValue: 'filter/maxAbvValue',
-      minAbvDefaultValue: 'filter/minAbvDefaultValue',
-      maxAbvDefaultValue: 'filter/maxAbvDefaultValue',
-      initialBrewedMonth: 'filter/initialBrewedMonth',
-      finalBrewedMonth: 'filter/finalBrewedMonth',
-    }),
-    numberOfFiltersApplied() {
-      let numberOfFiltersApplied = 0;
-      if (
-        this.minAbvValue !== this.minAbvDefaultValue ||
-        this.maxAbvValue !== this.maxAbvDefaultValue
-      )
-        numberOfFiltersApplied++;
-      if (this.initialBrewedMonth || this.finalBrewedMonth) numberOfFiltersApplied++;
-      return numberOfFiltersApplied;
-    },
-  },
+  computed: mapGetters({
+    numberOfFiltersApplied: 'filter/numberOfFiltersApplied',
+  }),
 };
 </script>
 

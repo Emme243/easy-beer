@@ -8,7 +8,7 @@
     max-width="290px"
     min-width="auto"
   >
-    <template v-slot:activator="{ on, attrs }">
+    <template #activator="{ on, attrs }">
       <v-text-field
         :value="brewedMonth"
         :label="inputLabel"
@@ -17,6 +17,7 @@
         v-bind="attrs"
         v-on="on"
         @click:append="handleBrewedMonthChange('')"
+        data-test-id="brewed-month-text-field"
       ></v-text-field>
     </template>
     <v-date-picker
@@ -27,10 +28,25 @@
       :min="brewedMinMonth"
       :max="brewedMaxMonth"
       show-current="2014-01"
+      data-test-id="brewed-month-date-picker"
     >
       <v-spacer></v-spacer>
-      <v-btn text color="primary" @click="handleBrewedMonthChange('')"> Limpiar </v-btn>
-      <v-btn text color="primary" @click="isModalOpen = false"> OK </v-btn>
+      <v-btn
+        text
+        color="primary"
+        @click="handleBrewedMonthChange('')"
+        data-test-id="reset-brewed-month-btn"
+      >
+        Limpiar
+      </v-btn>
+      <v-btn
+        text
+        color="primary"
+        @click="isModalOpen = false"
+        data-test-id="close-date-picker-button"
+      >
+        OK
+      </v-btn>
     </v-date-picker>
   </v-dialog>
 </template>

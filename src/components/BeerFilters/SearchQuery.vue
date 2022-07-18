@@ -1,11 +1,12 @@
 <template>
   <v-text-field
-    :value="searchQuery"
-    placeholder="Búsqueda de cerveza por nombre"
-    @input="handleSearchQueryChange"
-    prepend-icon="fa-solid fa-magnifying-glass"
+    id="search-query-input"
     :append-icon="searchQuery && 'fa fa-times'"
+    :value="searchQuery"
     @click:append="handleSearchQueryChange('')"
+    @input="handleSearchQueryChange"
+    placeholder="Búsqueda de cerveza por nombre"
+    prepend-icon="fa-solid fa-magnifying-glass"
   />
 </template>
 

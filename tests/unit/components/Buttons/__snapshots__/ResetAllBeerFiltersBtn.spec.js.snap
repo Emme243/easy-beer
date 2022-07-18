@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pruebas en ResetAllBeerFiltersBtn.vue Debe hacer match con el snapshot 1`] = `
+<div>
+  <span
+    class="v-tooltip v-tooltip--bottom"
+  >
+    <!---->
+    <button
+      aria-expanded="false"
+      aria-haspopup="true"
+      class="v-btn v-btn--disabled v-btn--has-bg theme--light v-size--small"
+      data-test-id="reset-all-filters-button"
+      disabled="disabled"
+      type="button"
+    >
+      <span
+        class="v-btn__content"
+      >
+        <i
+          aria-hidden="true"
+          class="v-icon notranslate fa fa-solid fa-filter-circle-xmark theme--light white--text"
+          style="font-size: 16px;"
+        />
+      </span>
+    </button>
+  </span>
+   
+  <div
+    class="v-snack v-snack--bottom v-snack--has-background"
+  >
+    <transition-stub
+      name="v-snack-transition"
+    >
+      <div
+        class="v-snack__wrapper v-sheet theme--dark red darken-3"
+        style="display: none;"
+      >
+        <div
+          aria-live="polite"
+          class="v-snack__content"
+          role="status"
+        >
+           
+    Se han limpiado TODOS los filtros de búsqueda.
+  
+        </div>
+        <div
+          class="v-snack__action "
+        >
+          <button
+            class="v-btn v-btn--outlined v-btn--text theme--dark v-size--default white--text v-snack__btn"
+            type="button"
+          >
+            <span
+              class="v-btn__content"
+            >
+              <i
+                aria-hidden="true"
+                class="v-icon notranslate fa fa fa fa-times theme--dark"
+              />
+            </span>
+          </button>
+        </div>
+      </div>
+    </transition-stub>
+  </div>
+</div>
+`;

@@ -3,7 +3,11 @@
     <div class="d-flex align-center">
       <h3 class="text-h6 mr-4">Volumen de alcohol</h3>
       <!--Beer ABV Range Reset Button-->
-      <button @click="resetAbvRangeInStore" v-show="!isAbvRangeWithDefaultValue">
+      <button
+        @click="() => resetAbvRangeInStore()"
+        v-show="!isAbvRangeWithDefaultValue"
+        id="reset-abv-range-btn"
+      >
         <v-icon small>fa fa-arrow-rotate-left</v-icon>
       </button>
     </div>
@@ -18,9 +22,10 @@
       step="1"
       thumb-label
       hide-details
+      data-test-id="abv-range-slider"
     />
-    <span class="font-weight-bold">
-      Se mostrarán cervezas con % de alcohol entre el ${{ minAbvValue }}% y el ${{ maxAbvValue }}%
+    <span class="font-weight-bold" data-test-id="abv-info-message">
+      Se mostrarán cervezas con % de alcohol entre el {{ minAbvValue }}% y el {{ maxAbvValue }}%
     </span>
   </div>
 </template>

@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pruebas en ResetBeerModalFiltersBtn.vue Debe hacer match con el snapshot 1`] = `
+<button
+  class="v-btn v-btn--outlined theme--light v-size--default blue--text"
+  data-test-id="reset-modal-filters-btn"
+  type="button"
+>
+  <span
+    class="v-btn__content"
+  >
+    <span>
+      Limpiar filtros
+    </span>
+     
+    <i
+      aria-hidden="true"
+      class="v-icon notranslate v-icon--right fa fa fa fa-eraser theme--light"
+    />
+  </span>
+</button>
+`;

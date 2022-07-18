@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isLoading" class="grid-list">
+  <div v-if="isLoading" class="grid-list" data-test-id="beer-loader">
     <v-skeleton-loader
       min-width="250"
       v-for="i in 6"
@@ -8,16 +8,16 @@
       type="image, list-item-two-line, button"
     />
   </div>
-  <v-alert v-else-if="hasError" type="error">
+  <v-alert v-else-if="hasError" type="error" data-test-id="beer-error-message">
     Ha habido un error al traer las cervezas, por qué no te relajas, te tomas una y lo vuelves a
     intentar más tarde 😉
   </v-alert>
-  <v-alert v-else-if="beers.length === 0" type="info">
+  <v-alert v-else-if="beers.length === 0" type="info" data-test-id="no-beer-message">
     <h3 class="text-h5">No hay cervezas que mostrar con el criterio solicitado.</h3>
     <span>Intenta reducir los criterios de búsqueda (barra de búsqueda y filtros)</span>
     <ResetAllBeerFiltersBtn color="blue darken-4" />
   </v-alert>
-  <div v-else class="grid-list mb-3 mt-5">
+  <div v-else class="grid-list mb-3 mt-5" data-test-id="beer-container">
     <BeerInfoCard v-for="beer in beers" :key="`${beer.id}-${beer.name}`" :beer="beer" />
   </div>
 </template>
@@ -40,7 +40,6 @@ export default {
   },
   methods: {
     fetchBeers() {
-      console.log('fetchBeers');
       this.isLoading = true;
       this.hasError = false;
       this.$api.beers
@@ -97,7 +96,7 @@ export default {
     //       Anteriormente, cuando se cambiaba una propiedad de filtrado, se hacía el fetch por cada cambio que había,
     //       es decir, cuando se cambiaba searchQuery se hacía un fetch,
     //       cuando se cambiaba minAbvValue se hacía otro fetch, y así por cada cambio en los filtros de forma individual.
-    //       EJEMPLO: En la app, se tiene un botón que reseta los 4 tipos de filtrado en una sola vez,
+    //       EJEMPLO: En la app, se tiene un botón que resetea los 4 tipos de filtrado en una sola vez,
     //       por lo que al resetear los 4 filtros, se hacía el fetch de todas las cervezas 4 veces,
     //       se escuchaban de manera individual estos filtros.
     //
@@ -105,7 +104,7 @@ export default {
     //       aun si se cambian las 4 propiedades de filtrado uno por uno,
     //       se hace el fetch de todas las cervezas 1 VEZ,
     //       ya que se escuchan de manera reactiva todas las propiedades de filtrado
-    //       centralizadas en un solo objeto que las contiene.
+    //       centralizadas en un único objeto que las contiene.
     filterStore() {
       this.fetchBeers();
 
