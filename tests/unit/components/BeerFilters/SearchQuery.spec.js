@@ -17,7 +17,6 @@ describe('Pruebas en el componente SearchQuery.vue', function () {
 
   beforeEach(() => {
     vuetify = new Vuetify();
-    store.dispatch = jest.fn();
   });
 
   const newSearchQuery = 'cervecita';
@@ -29,6 +28,7 @@ describe('Pruebas en el componente SearchQuery.vue', function () {
   });
 
   it('Debe llamar al dispatch setSearchQueryInStore y al dispatch resetPage cuando se escribe en el input', async function () {
+    store.dispatch = jest.fn();
     const wrapper = mountFunction();
     const inputElement = wrapper.find(textInputSelector);
     await inputElement.setValue(newSearchQuery);

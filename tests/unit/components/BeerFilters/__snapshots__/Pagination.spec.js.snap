@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pruebas en el componentes Pagination.vue Debe hacer match con el snapshot 1`] = `
+<div class="py-3 beerPagination">
+  <nav role="navigation" aria-label="Pagination Navigation">
+    <ul class="v-pagination theme--light">
+      <li><button disabled="disabled" type="button" aria-label="Previous page" class="v-pagination__navigation v-pagination__navigation--disabled"><i aria-hidden="true" class="v-icon notranslate fa fa fa fa-caret-left theme--light"></i></button></li>
+      <li><button type="button" aria-label="Goto Page 1" class="v-pagination__item">1</button></li>
+      <li><button type="button" aria-label="Goto Page 2" class="v-pagination__item">2</button></li>
+      <li><button type="button" aria-label="Goto Page 3" class="v-pagination__item">3</button></li>
+      <li><button type="button" aria-label="Goto Page 4" class="v-pagination__item">4</button></li>
+      <li><button type="button" aria-label="Goto Page 5" class="v-pagination__item">5</button></li>
+      <li><button type="button" aria-label="Goto Page 6" class="v-pagination__item">6</button></li>
+      <li><button type="button" aria-label="Goto Page 7" class="v-pagination__item">7</button></li>
+      <li><button type="button" aria-label="Goto Page 8" class="v-pagination__item">8</button></li>
+      <li><button type="button" aria-label="Next page" class="v-pagination__navigation"><i aria-hidden="true" class="v-icon notranslate fa fa fa fa-caret-right theme--light"></i></button></li>
+    </ul>
+  </nav>
+</div>
+`;
