@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pruebas en el componente beerList.vue Debe hacer match con el snapshot 1`] = `
+<div data-test-id="beer-loader" class="grid-list">
+  <v-skeleton-loader-stub minwidth="250" boilerplate="true" type="image, list-item-two-line, button" types="[object Object]"></v-skeleton-loader-stub>
+  <v-skeleton-loader-stub minwidth="250" boilerplate="true" type="image, list-item-two-line, button" types="[object Object]"></v-skeleton-loader-stub>
+  <v-skeleton-loader-stub minwidth="250" boilerplate="true" type="image, list-item-two-line, button" types="[object Object]"></v-skeleton-loader-stub>
+  <v-skeleton-loader-stub minwidth="250" boilerplate="true" type="image, list-item-two-line, button" types="[object Object]"></v-skeleton-loader-stub>
+  <v-skeleton-loader-stub minwidth="250" boilerplate="true" type="image, list-item-two-line, button" types="[object Object]"></v-skeleton-loader-stub>
+  <v-skeleton-loader-stub minwidth="250" boilerplate="true" type="image, list-item-two-line, button" types="[object Object]"></v-skeleton-loader-stub>
+</div>
+`;
