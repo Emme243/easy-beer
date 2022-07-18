@@ -10,6 +10,7 @@
           small
           v-bind="attrs"
           v-on="on"
+          data-test-id="reset-all-filters-button"
         >
           <v-icon small color="white">fa-solid fa-filter-circle-xmark</v-icon>
         </v-btn>
