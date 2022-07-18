@@ -1,8 +1,13 @@
 <template>
   <v-tooltip bottom color="deep-purple" class="d-flex align-center">
     <template #activator="{ on, attrs }">
-      <button v-bind="attrs" v-on="on" @click="handleBeerInFavoritesInStore(beer)">
-        <v-icon :color="iconColor" size="20">{{ heartIcon }}</v-icon>
+      <button
+        v-bind="attrs"
+        v-on="on"
+        @click="handleBeerInFavoritesInStore(beer)"
+        data-test-id="heart-icon-button"
+      >
+        <v-icon :color="iconColor" size="20" data-test-id="heart-icon">{{ heartIcon }}</v-icon>
       </button>
     </template>
     <v-icon dark small>{{ heartIcon }}</v-icon>
