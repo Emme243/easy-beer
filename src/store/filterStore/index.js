@@ -31,6 +31,12 @@ export const filterStore = {
         !getters.searchQuery
       );
     },
+    numberOfFiltersApplied(_, getters) {
+      let numberOfFiltersApplied = 0;
+      if (!getters.isAbvRangeWithDefaultValue) numberOfFiltersApplied++;
+      if (getters.initialBrewedMonth || getters.finalBrewedMonth) numberOfFiltersApplied++;
+      return numberOfFiltersApplied;
+    },
   },
   mutations: {},
   actions: {

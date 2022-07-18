@@ -107,4 +107,30 @@ describe('Vuex - Pruebas en el estado de los filtros de cerveza (filterStore)', 
     const filter = store.getters['filter/filterStore'];
     expect(filter).toEqual({ ...filterStoreWithDefaultValues, page: 1 });
   });
+
+  it('Deberá el getter numberOfFiltersApplied retornar 0 cuando no haya filtros aplicados', function () {
+    const numberOfFiltersApplied = store.getters['filter/numberOfFiltersApplied'];
+    expect(numberOfFiltersApplied).toBe(0);
+  });
+
+  it('Deberá el getter numberOfFiltersApplied retornar 1 cuando haya un filtro aplicado (brewedMonth)', function () {
+    store.commit('filter/setInitialBrewedMonth', '2019-01');
+    const numberOfFiltersApplied = store.getters['filter/numberOfFiltersApplied'];
+    expect(numberOfFiltersApplied).toBe(1);
+  });
+
+  it('Deberá el getter numberOfFiltersApplied retornar 1 cuando haya un filtro aplicado (abvRange)', function () {
+    store.dispatch('filter/resetAllFilters');
+    store.commit('filter/setMinAbvValue', 43);
+    const numberOfFiltersApplied = store.getters['filter/numberOfFiltersApplied'];
+    expect(numberOfFiltersApplied).toBe(1);
+  });
+
+  it('Deberá el getter numberOfFiltersApplied retornar 2 cuando haya dos filtros aplicados (brewedMonth y abvRange)', function () {
+    store.dispatch('filter/resetAllFilters');
+    store.commit('filter/setFinalBrewedMonth', '2019-01');
+    store.commit('filter/setMinAbvValue', 34);
+    const numberOfFiltersApplied = store.getters['filter/numberOfFiltersApplied'];
+    expect(numberOfFiltersApplied).toBe(2);
+  });
 });
