@@ -1,6 +1,6 @@
 import AbvRangeFilter from '@/components/BeerFilters/AbvRangeFilter';
 import store from '@/store';
-import { createLocalVue, mount, shallowMount } from '@vue/test-utils';
+import { createLocalVue, shallowMount } from '@vue/test-utils';
 import Vuetify from 'vuetify';
 
 describe('Pruebas en el componente AbvRangeFilter.vue', function () {

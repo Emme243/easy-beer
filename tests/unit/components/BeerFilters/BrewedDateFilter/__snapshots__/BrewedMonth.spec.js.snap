@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pruebas en el componente BrewedMonth.vue Debe hacer match con el snapshot 1`] = `
+<v-dialog-stub contentclass="" overlayopacity="0.3" opendelay="0" closedelay="0" openonclick="true" maxwidth="290px" origin="center center" retainfocus="true" transition="scale-transition" offset-y="" min-width="auto">
+  <v-date-picker-stub width="290" eventcolor="warning" firstdayofweek="0" localefirstdayofyear="0" max="10-2014" min="" nexticon="$next" nextmontharialabel="$vuetify.datePicker.nextMonthAriaLabel" nextyeararialabel="$vuetify.datePicker.nextYearAriaLabel" previcon="$prev" prevmontharialabel="$vuetify.datePicker.prevMonthAriaLabel" prevyeararialabel="$vuetify.datePicker.prevYearAriaLabel" scrollable="true" showcurrent="2014-01" selecteditemstext="$vuetify.datePicker.itemsSelected" type="month" value="02-2014" data-test-id="brewed-month-date-picker">
+    <v-spacer-stub tag="div"></v-spacer-stub>
+    <v-btn-stub color="primary" tag="button" activeclass="" text="true" type="button" data-test-id="reset-brewed-month-btn">
+      Limpiar
+    </v-btn-stub>
+    <v-btn-stub color="primary" tag="button" activeclass="" text="true" type="button" data-test-id="close-date-picker-button">
+      OK
+    </v-btn-stub>
+  </v-date-picker-stub>
+</v-dialog-stub>
+`;
