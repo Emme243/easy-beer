@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pruebas en el componente BrewedDateFilter/index.vue Debe hacer match con el snapshot 1`] = `
+<div>
+  <div class="d-flex align-center">
+    <h3 class="text-h6 mr-4">Fecha de elaboración</h3> <button data-test-id="reset-brewed-date-btn" style="display: none;">
+      <v-icon-stub small="">fa fa-arrow-rotate-left</v-icon-stub>
+    </button>
+  </div>
+  <v-row-stub tag="div">
+    <v-col-stub cols="6" tag="div">
+      <initialbrewedmonth-stub></initialbrewedmonth-stub>
+    </v-col-stub>
+    <v-col-stub cols="6" tag="div">
+      <finalbrewedmonth-stub></finalbrewedmonth-stub>
+    </v-col-stub>
+  </v-row-stub> <span data-test-id="info-message" class="font-weight-bold">
+    Se mostrarán cervezas elaboradas hasta la fecha actual
+  </span>
+</div>
+`;

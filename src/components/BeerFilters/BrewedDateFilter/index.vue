@@ -3,7 +3,11 @@
     <div class="d-flex align-center">
       <h3 class="text-h6 mr-4">Fecha de elaboración</h3>
       <!--Beer Brewed Date Reset Button-->
-      <button @click="handleResetBrewedDate" v-show="!!initialBrewedMonth || !!finalBrewedMonth">
+      <button
+        @click="handleResetBrewedDate"
+        v-show="!!initialBrewedMonth || !!finalBrewedMonth"
+        data-test-id="reset-brewed-date-btn"
+      >
         <v-icon small>fa fa-arrow-rotate-left</v-icon>
       </button>
     </div>
@@ -15,7 +19,9 @@
         <FinalBrewedMonth />
       </v-col>
     </v-row>
-    <span class="font-weight-bold">Se mostrarán cervezas elaboradas {{ helperText }}</span>
+    <span class="font-weight-bold" data-test-id="info-message">
+      Se mostrarán cervezas elaboradas {{ helperText }}
+    </span>
   </div>
 </template>
 
