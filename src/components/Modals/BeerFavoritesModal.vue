@@ -35,7 +35,7 @@
 
       <v-card>
         <v-toolbar dark color="deep-purple">
-          <v-btn icon dark @click="isModalOpen = false">
+          <v-btn icon dark @click="isModalOpen = false" data-test-id="close-modal-btn">
             <v-icon small>fa fa-times</v-icon>
           </v-btn>
           <v-toolbar-title>
@@ -46,10 +46,15 @@
         </v-toolbar>
 
         <v-card-text class="pt-5">
-          <v-alert color="deep-purple lighten-1" type="info" v-if="isFavoriteBeersEmpty">
+          <v-alert
+            color="deep-purple lighten-1"
+            type="info"
+            v-if="isFavoriteBeersEmpty"
+            data-test-id="no-beers-message"
+          >
             No tienes cervezas favoritas por el momento.
           </v-alert>
-          <div class="beerFavoritesModal__beerCards" v-else>
+          <div class="beerFavoritesModal__beerCards" v-else data-test-id="beers-container">
             <BeerInfoCard v-for="beer in favoriteBeersInStore" :key="beer.id" :beer="beer" />
           </div>
         </v-card-text>
@@ -63,11 +68,19 @@
             depressed
             @click="resetFavoriteBeersInStore"
             :disabled="isFavoriteBeersEmpty"
+            data-test-id="reset-favorites-btn"
           >
             <span :class="{ 'white--text': !isFavoriteBeersEmpty }">Vacíar</span>
             <v-icon right color="white">fa fa-eraser</v-icon>
           </v-btn>
-          <v-btn color="deep-purple" outlined dark depressed @click="isModalOpen = false">
+          <v-btn
+            color="deep-purple"
+            outlined
+            dark
+            depressed
+            @click="isModalOpen = false"
+            data-test-id="close-modal-cerrar-btn"
+          >
             <span>Cerrar</span>
             <v-icon right>fa fa-times</v-icon>
           </v-btn>

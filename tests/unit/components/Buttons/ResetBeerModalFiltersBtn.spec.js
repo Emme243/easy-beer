@@ -2,19 +2,16 @@ import ResetBeerModalFiltersBtn from '@/components/Buttons/ResetBeerModalFilters
 import store from '@/store';
 import { createLocalVue, mount } from '@vue/test-utils';
 import Vuetify from 'vuetify';
-import { beersMock } from '../../mocks/beersMock';
 
 describe('Pruebas en ResetBeerModalFiltersBtn.vue', function () {
   let vuetify;
   const localVue = createLocalVue();
 
-  const beer = beersMock[0];
   const mountFunction = options => {
     return mount(ResetBeerModalFiltersBtn, {
       localVue,
       vuetify,
       store,
-      propsData: { beer },
       ...options,
     });
   };

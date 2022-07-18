@@ -2,19 +2,16 @@ import ResetAllBeerFiltersBtn from '@/components/Buttons/ResetAllBeerFiltersBtn'
 import store from '@/store';
 import { createLocalVue, mount } from '@vue/test-utils';
 import Vuetify from 'vuetify';
-import { beersMock } from '../../mocks/beersMock';
 
 describe('Pruebas en ResetAllBeerFiltersBtn.vue', function () {
   let vuetify;
   const localVue = createLocalVue();
 
-  const beer = beersMock[0];
   const mountFunction = options => {
     return mount(ResetAllBeerFiltersBtn, {
       localVue,
       vuetify,
       store,
-      propsData: { beer },
       ...options,
     });
   };
